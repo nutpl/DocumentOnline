@@ -1,0 +1,39 @@
+services:
+  # บริการสำหรับรันเว็บ PHP
+  web:
+    build: .
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+  # บริการฐานข้อมูล MySQL
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: document_online
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: password123
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      # นำเข้า schema.txt อัตโนมัติเมื่อสร้าง Database ครั้งแรก
+      - ./schema.txt:/docker-entrypoint-initdb.d/schema.sql
+
+  # บริการ phpMyAdmin สำหรับจัดการข้อมูลผ่านเว็บ (พอร์ต 8081)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
+      WORD_PDF_RENDERER: "libreoffice"
+
+volumes:
+  db_data:
