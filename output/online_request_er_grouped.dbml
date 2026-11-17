@@ -1,0 +1,631 @@
+Project online_request_er {
+  database_type: 'MySQL'
+  Note: 'ER ฐานข้อมูล online_request: 40 ตาราง แบ่งตามขอบเขตการทำงาน 7 กลุ่ม'
+}
+
+Table activity_log {
+  log_id bigint [pk, increment, not null]
+  user_id int
+  activity varchar [not null]
+  detail text
+  activity_time timestamp [not null]
+}
+
+Table department {
+  department_id int [pk, increment, not null]
+  faculty_id int [not null]
+  department_abbreviation varchar [not null, unique]
+  department_name varchar [not null]
+}
+
+Table document_attachments {
+  attachment_id int [pk, increment, not null]
+  document_id int [not null]
+  uploaded_by int [not null]
+  original_name varchar [not null]
+  stored_name varchar [not null]
+  file_path varchar [not null]
+  mime_type varchar [not null]
+  file_size bigint [not null]
+  uploaded_at timestamp [not null]
+}
+
+Table document_events {
+  event_id bigint [pk, increment, not null]
+  document_id int [not null]
+  document_step_id bigint
+  actor_user_id int
+  event_type varchar [not null]
+  detail text
+  created_at timestamp [not null]
+}
+
+Table document_field_values {
+  value_id int [pk, increment, not null]
+  document_id int [not null]
+  field_id int [not null]
+  field_value text
+  updated_at timestamp [not null]
+}
+
+Table document_review_processes {
+  process_id bigint [pk, increment, not null]
+  document_id int [not null, unique]
+  workflow_id int [not null]
+  workflow_version_no int [not null]
+  current_step_order smallint
+  process_status enum [not null]
+  revision_count int [not null]
+  started_at timestamp [not null]
+  completed_at datetime
+  updated_at timestamp [not null]
+}
+
+Table document_review_step_instances {
+  document_step_id bigint [pk, increment, not null]
+  process_id bigint [not null]
+  source_workflow_step_id int
+  step_order smallint [not null]
+  role_code varchar [not null]
+  step_name varchar [not null]
+  reviewer_employee_id int
+  reviewer_user_id int
+  step_status enum [not null]
+  attempt_count int [not null]
+  activated_at datetime
+  reviewed_at datetime
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table document_template {
+  template_id int [pk, increment, not null]
+  document_type_id int [not null]
+  template_name varchar [not null]
+  pdf_template varchar
+  docx_template varchar
+  original_file varchar [not null]
+  preview_image varchar
+  total_pages int
+  file_type varchar
+  status enum [not null]
+  imported_by int
+  imported_at timestamp [not null]
+}
+
+Table document_type {
+  document_type_id int [pk, increment, not null]
+  document_code varchar [not null, unique]
+  document_name varchar [not null]
+  form_file varchar
+  description text
+  status enum [not null]
+}
+
+Table documents {
+  document_id int [pk, increment, not null]
+  student_id int [not null]
+  template_id int [not null]
+  document_status enum [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+  submitted_at datetime
+}
+
+Table employee {
+  employee_id int [pk, increment, not null]
+  user_id int [not null, unique]
+  employee_code varchar [not null, unique]
+  prefix_id int
+  firstname varchar [not null]
+  lastname varchar [not null]
+  phone varchar
+  department_id int [not null]
+  employee_type enum [not null]
+  created_at timestamp [not null]
+}
+
+Table employee_position {
+  employee_position_id int [pk, increment, not null]
+  employee_id int [not null]
+  position_id int [not null]
+  is_primary tinyint [not null]
+}
+
+Table faculty {
+  faculty_id int [pk, increment, not null]
+  faculty_abbreviation varchar [not null, unique]
+  faculty_name varchar [not null]
+}
+
+Table group_class {
+  group_id int [pk, increment, not null]
+  department_id int [not null]
+  group_name varchar [not null, unique]
+  advisor_employee_id int
+}
+
+Table internship_application {
+  internship_application_id int [pk, increment, not null]
+  internship_profile_id int [not null, unique]
+  document_id int [not null, unique]
+  request_date date [not null]
+  contact_status enum [not null]
+  delivery_method enum [not null]
+  status enum [not null]
+  signed_file varchar
+  submitted_at datetime
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table internship_calendar {
+  calendar_id int [pk, increment, not null]
+  academic_year smallint [not null]
+  semester tinyint [not null]
+  start_date date [not null]
+  end_date date [not null]
+  status enum [not null]
+  created_by int
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table internship_excel_sync {
+  sync_id int [pk, increment, not null]
+  department_id int [not null, unique]
+  connected_by_user_id int [not null]
+  refresh_token_encrypted text [not null]
+  access_token_encrypted text
+  access_token_expires_at datetime
+  drive_id varchar
+  item_id varchar
+  workbook_name varchar
+  worksheet_name varchar
+  share_url text
+  last_synced_at datetime
+  last_sync_status varchar
+  last_sync_message text
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table internship_official_document {
+  official_document_id int [pk, increment, not null]
+  document_type enum [not null]
+  company_name varchar [not null]
+  document_number varchar [not null]
+  document_date date [not null]
+  recipient_name varchar [not null]
+  reference_text varchar
+  response_due_date date
+  signatory_name varchar [not null]
+  signatory_title_line1 varchar [not null]
+  signatory_title_line2 varchar
+  created_by int [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table internship_official_student {
+  official_document_id int [pk, not null]
+  internship_profile_id int [pk, not null]
+  sequence_no smallint [not null]
+}
+
+Table internship_profile {
+  internship_profile_id int [pk, increment, not null]
+  student_id int [not null]
+  request_status enum [not null]
+  request_reason enum [not null]
+  previous_profile_id int
+  closed_reason varchar
+  closed_at datetime
+  calendar_id int
+  student_phone varchar
+  year_level tinyint
+  recipient_name varchar
+  company_name varchar [not null]
+  company_address text
+  subdistrict varchar
+  district varchar
+  province varchar
+  postal_code varchar
+  company_phone varchar
+  company_fax varchar
+  contact_prefix varchar
+  contact_name varchar
+  contact_position varchar
+  contact_phone varchar
+  job_position varchar
+  job_description text
+  capacity_note varchar
+  recipient_position varchar
+  recipient_department varchar
+  company_number varchar
+  company_moo varchar
+  company_building varchar
+  company_floor varchar
+  company_road varchar
+  company_alley varchar
+  company_email varchar
+  contact_department varchar
+  contact_email varchar
+  qualification_department tinyint [not null]
+  qualification_preparation tinyint [not null]
+  qualification_gpa tinyint [not null]
+  qualification_company tinyint [not null]
+  updated_at timestamp [not null]
+  created_at timestamp [not null]
+}
+
+Table internship_response_document {
+  response_document_id int [pk, increment, not null]
+  internship_profile_id int [not null, unique]
+  original_filename varchar [not null]
+  stored_filename varchar [not null]
+  review_status enum [not null]
+  review_note text
+  reviewed_by int
+  uploaded_at datetime [not null]
+  reviewed_at datetime
+  updated_at timestamp [not null]
+}
+
+Table internship_supervision {
+  internship_supervision_id int [pk, increment, not null]
+  internship_profile_id int [not null, unique]
+  supervisor_employee_id int
+  visit1_date date
+  visit1_time time
+  visit1_mode enum
+  visit2_date date
+  visit2_time time
+  visit2_mode enum
+  supervisor_names text
+  updated_by int
+  lock_version int [not null]
+  updated_at timestamp [not null]
+}
+
+Table internship_tracking {
+  internship_tracking_id int [pk, increment, not null]
+  internship_profile_id int [not null, unique]
+  request_letter_status enum
+  response_status enum
+  application_status enum
+  send_letter_status enum
+  employment_status enum [not null]
+  notes text
+  updated_by int
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table notifications {
+  notification_id bigint [pk, increment, not null]
+  recipient_user_id int [not null]
+  document_id int
+  notification_type varchar [not null]
+  title varchar [not null]
+  message text [not null]
+  target_url varchar
+  is_read tinyint [not null]
+  created_at timestamp [not null]
+  read_at datetime
+}
+
+Table office_holders {
+  office_holder_id int [pk, increment, not null]
+  position_id int [not null]
+  employee_id int
+  holder_name varchar
+  department_id int [not null]
+  effective_from date [not null]
+  effective_to date
+  is_active tinyint [not null]
+  signature_title_line1 varchar
+  signature_title_line2 varchar
+  created_by int
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table password_reset_otp {
+  otp_id int [pk, increment, not null]
+  user_id int [not null]
+  otp_code varchar [not null]
+  expire_at datetime [not null]
+  used tinyint [not null]
+  created_at timestamp [not null]
+}
+
+Table positions {
+  position_id int [pk, increment, not null]
+  position_name varchar [not null, unique]
+}
+
+Table prefixes {
+  prefix_id int [pk, increment, not null]
+  prefix_name varchar [not null]
+  prefix_short varchar
+  status enum [not null]
+  created_at timestamp [not null]
+}
+
+Table r01_request {
+  r01_id int [pk, increment, not null]
+  document_id int [not null, unique]
+  advisor_employee_id int [not null]
+  subject varchar
+  recipient varchar
+  request_detail text
+  phone varchar
+  created_at timestamp [not null]
+}
+
+Table r12_request {
+  r12_id int [pk, increment, not null]
+  document_id int [not null, unique]
+  advisor_employee_id int [not null]
+  course_code varchar
+  course_name varchar
+  old_group varchar
+  new_group varchar
+  reason text
+  created_at timestamp [not null]
+}
+
+Table r12_request_courses {
+  r12_course_id int [pk, increment, not null]
+  r12_id int [not null]
+  item_no tinyint [not null]
+  semester varchar
+  course_code varchar
+  course_name varchar
+  section varchar
+  old_group varchar
+  new_group varchar
+}
+
+Table r14_request {
+  r14_id int [pk, increment, not null]
+  document_id int [not null, unique]
+  semester varchar [not null]
+  academic_year varchar [not null]
+  request_type enum [not null]
+  enrolled_credits decimal [not null]
+  cumulative_gpa decimal [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table r18_request {
+  r18_id int [pk, increment, not null]
+  document_id int [not null, unique]
+  course_code varchar
+  course_name varchar
+  credits decimal
+  semester varchar
+  academic_year varchar
+  teacher_employee_id int
+  reason text
+  created_at timestamp [not null]
+}
+
+Table r24_request {
+  r24_id int [pk, increment, not null]
+  document_id int [not null, unique]
+  leave_type varchar
+  start_date date
+  end_date date
+  reason text
+  course_code varchar
+  course_name varchar
+  teacher_employee_id int
+  created_at timestamp [not null]
+}
+
+Table review_workflow_steps {
+  workflow_step_id int [pk, increment, not null]
+  workflow_id int [not null]
+  step_order smallint [not null]
+  role_code varchar [not null]
+  step_name varchar [not null]
+  reviewer_source enum [not null]
+  reviewer_employee_id int
+  reviewer_position_id int
+  scope_type enum [not null]
+  is_required tinyint [not null]
+  created_at timestamp [not null]
+}
+
+Table review_workflows {
+  workflow_id int [pk, increment, not null]
+  document_type_id int [not null]
+  workflow_name varchar [not null]
+  version_no int [not null]
+  workflow_status enum [not null]
+  revision_return_policy enum [not null]
+  created_by int
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table student {
+  student_id int [pk, increment, not null]
+  user_id int [not null, unique]
+  student_number varchar [not null, unique]
+  prefix_id int
+  firstname varchar [not null]
+  lastname varchar [not null]
+  group_id int
+}
+
+Table template_fields {
+  field_id int [pk, increment, not null]
+  template_id int [not null]
+  field_name varchar [not null]
+  field_label varchar [not null]
+  field_type enum [not null]
+  page_no int [not null]
+  pos_x decimal [not null]
+  pos_y decimal [not null]
+  width decimal [not null]
+  height decimal [not null]
+  font_size decimal [not null]
+  required_field tinyint [not null]
+  default_value text
+}
+
+Table user_roles {
+  user_role_id int [pk, increment, not null]
+  user_id int [not null]
+  role enum [not null]
+}
+
+Table users {
+  user_id int [pk, increment, not null]
+  username varchar [not null, unique]
+  email varchar [not null, unique]
+  password varchar [not null]
+  first_login tinyint [not null]
+  status enum [not null]
+  active_session_token_hash char
+  active_session_at datetime
+  created_at timestamp [not null]
+}
+
+TableGroup group_1_identity [color: #3B82F6, note: 'บัญชีผู้ใช้ สิทธิ์ และการแจ้งเตือน'] {
+  users
+  user_roles
+  password_reset_otp
+  activity_log
+  notifications
+}
+
+TableGroup group_2_organization [color: #8B5CF6, note: 'คณะ สาขา บุคลากร กลุ่มเรียน และนักศึกษา'] {
+  faculty
+  department
+  prefixes
+  positions
+  employee
+  employee_position
+  office_holders
+  group_class
+  student
+}
+
+TableGroup group_3_document_configuration [color: #F97316, note: 'ประเภทเอกสาร แม่แบบ และลำดับพิจารณา'] {
+  document_type
+  document_template
+  template_fields
+  review_workflows
+  review_workflow_steps
+}
+
+TableGroup group_4_requests [color: #EF4444, note: 'การจัดทำและส่งคำร้อง'] {
+  documents
+  document_field_values
+  document_attachments
+  r01_request
+  r12_request
+  r12_request_courses
+  r14_request
+  r18_request
+  r24_request
+}
+
+TableGroup group_5_review_history [color: #A855F7, note: 'การพิจารณาเอกสารและประวัติ'] {
+  document_review_processes
+  document_review_step_instances
+  document_events
+}
+
+TableGroup group_6_internship [color: #10B981, note: 'งานฝึกประสบการณ์วิชาชีพและแผนนิเทศ'] {
+  internship_calendar
+  internship_profile
+  internship_application
+  internship_response_document
+  internship_tracking
+  internship_supervision
+}
+
+TableGroup group_7_official_output [color: #EAB308, note: 'หนังสือราชการและการส่งออกข้อมูล'] {
+  internship_official_document
+  internship_official_student
+  internship_excel_sync
+}
+
+// ความสัมพันธ์: ฝั่งซ้ายเป็นตารางที่เก็บ FK และชี้ไปยัง PK/FK ฝั่งขวา
+Ref: activity_log.user_id > users.user_id
+Ref: department.faculty_id > faculty.faculty_id
+Ref: document_attachments.document_id > documents.document_id
+Ref: document_attachments.uploaded_by > users.user_id
+Ref: document_events.actor_user_id > users.user_id
+Ref: document_events.document_id > documents.document_id
+Ref: document_events.document_step_id > document_review_step_instances.document_step_id
+Ref: document_field_values.document_id > documents.document_id
+Ref: document_field_values.field_id > template_fields.field_id
+Ref: document_review_processes.document_id > documents.document_id
+Ref: document_review_processes.workflow_id > review_workflows.workflow_id
+Ref: document_review_step_instances.reviewer_employee_id > employee.employee_id
+Ref: document_review_step_instances.process_id > document_review_processes.process_id
+Ref: document_review_step_instances.source_workflow_step_id > review_workflow_steps.workflow_step_id
+Ref: document_review_step_instances.reviewer_user_id > users.user_id
+Ref: document_template.document_type_id > document_type.document_type_id
+Ref: document_template.imported_by > users.user_id
+Ref: documents.student_id > student.student_id
+Ref: documents.template_id > document_template.template_id
+Ref: employee.department_id > department.department_id
+Ref: employee.prefix_id > prefixes.prefix_id
+Ref: employee.user_id > users.user_id
+Ref: employee_position.employee_id > employee.employee_id
+Ref: employee_position.position_id > positions.position_id
+Ref: group_class.advisor_employee_id > employee.employee_id
+Ref: group_class.department_id > department.department_id
+Ref: internship_application.document_id > documents.document_id
+Ref: internship_application.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_calendar.created_by > users.user_id
+Ref: internship_excel_sync.department_id > department.department_id
+Ref: internship_excel_sync.connected_by_user_id > users.user_id
+Ref: internship_official_document.created_by > users.user_id
+Ref: internship_official_student.official_document_id > internship_official_document.official_document_id
+Ref: internship_official_student.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_profile.calendar_id > internship_calendar.calendar_id
+Ref: internship_profile.previous_profile_id > internship_profile.internship_profile_id
+Ref: internship_profile.student_id > student.student_id
+Ref: internship_response_document.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_response_document.reviewed_by > users.user_id
+Ref: internship_supervision.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_supervision.updated_by > users.user_id
+Ref: internship_supervision.supervisor_employee_id > employee.employee_id
+Ref: internship_tracking.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_tracking.updated_by > users.user_id
+Ref: notifications.document_id > documents.document_id
+Ref: notifications.recipient_user_id > users.user_id
+Ref: office_holders.created_by > users.user_id
+Ref: office_holders.department_id > department.department_id
+Ref: office_holders.employee_id > employee.employee_id
+Ref: office_holders.position_id > positions.position_id
+Ref: password_reset_otp.user_id > users.user_id
+Ref: r01_request.document_id > documents.document_id
+Ref: r01_request.advisor_employee_id > employee.employee_id
+Ref: r12_request.document_id > documents.document_id
+Ref: r12_request.advisor_employee_id > employee.employee_id
+Ref: r12_request_courses.r12_id > r12_request.r12_id
+Ref: r14_request.document_id > documents.document_id
+Ref: r18_request.document_id > documents.document_id
+Ref: r18_request.teacher_employee_id > employee.employee_id
+Ref: r24_request.document_id > documents.document_id
+Ref: r24_request.teacher_employee_id > employee.employee_id
+Ref: review_workflow_steps.reviewer_employee_id > employee.employee_id
+Ref: review_workflow_steps.reviewer_position_id > positions.position_id
+Ref: review_workflow_steps.workflow_id > review_workflows.workflow_id
+Ref: review_workflows.created_by > users.user_id
+Ref: review_workflows.document_type_id > document_type.document_type_id
+Ref: student.group_id > group_class.group_id
+Ref: student.prefix_id > prefixes.prefix_id
+Ref: student.user_id > users.user_id
+Ref: template_fields.template_id > document_template.template_id
+Ref: user_roles.user_id > users.user_id

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <link rel="icon" type="image/png" href="/Project/assets/images/fet-logo-transparent.png?v=20260815-3">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ดาวน์โหลดแบบคำร้อง | ฝ่ายฝึกประสบการณ์วิชาชีพ คณะวิศวกรรมศาสตร์และเทคโนโลยี มทร.อีสาน</title>
+  
+  <!-- Google Fonts: Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS v3 Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              red: {
+                50: '#fef2f2',
+                100: '#fee2e2',
+                200: '#fecaca',
+                300: '#fca5a5',
+                400: '#f87171',
+                500: '#ef4444',
+                600: '#dc2626',
+                700: '#b91c1c',
+                800: '#991b1b',
+                900: '#7f1d1d',
+                950: '#450a0a',
+              },
+              dark: {
+                50: '#fafafa',
+                100: '#f4f4f5',
+                800: '#27272a',
+                900: '#18181b',
+                950: '#09090b',
+              }
+            }
+          },
+          boxShadow: {
+            'neon-red': '0 0 15px rgba(220, 38, 38, 0.15)',
+            'neon-red-hover': '0 0 25px rgba(220, 38, 38, 0.3)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brand-dark-50 text-brand-dark-900 font-sans min-h-screen flex flex-col selection:bg-brand-red-600 selection:text-white">
+
+  <!-- TOP BAR -->
+  <div class="bg-brand-dark-950 text-zinc-300 py-2.5 px-4 sm:px-6 lg:px-8 border-b border-brand-red-900/30 text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <!-- Email / Phone -->
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+        <a href="mailto:FET@rmuti.ac.th" class="flex items-center gap-2 hover:text-brand-red-400 transition-colors duration-200">
+          <i class="fa-regular fa-envelope text-brand-red-500"></i>
+          <span>FET@rmuti.ac.th</span>
+        </a>
+        <span class="text-zinc-700 hidden sm:inline">|</span>
+        <a href="tel:044233073" class="flex items-center gap-2 hover:text-brand-red-400 transition-colors duration-200">
+          <i class="fa-solid fa-phone text-brand-red-500"></i>
+          <span>0-4423-3073</span>
+        </a>
+      </div>
+      <!-- Socials / System links -->
+      <div class="flex items-center gap-4">
+        <span class="text-xs text-zinc-400 hidden md:inline">คณะวิศวกรรมศาสตร์และเทคโนโลยี มทร.อีสาน</span>
+        <div class="flex items-center gap-3">
+          <a href="#" class="w-7 h-7 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-300 hover:bg-brand-red-700 hover:text-white transition-all duration-200" title="Facebook">
+            <i class="fa-brands fa-facebook-f text-xs"></i>
+          </a>
+          <a href="#" class="w-7 h-7 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-300 hover:bg-brand-red-700 hover:text-white transition-all duration-200" title="YouTube">
+            <i class="fa-brands fa-youtube text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER SECTION -->
+  <header class="bg-white py-5 px-4 sm:px-6 lg:px-8 shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+        <!-- Logo -->
+        <div class="transition-transform duration-300 hover:scale-105">
+          <img src="img/ตราคณะ.png" alt="ตราคณะวิศวกรรมศาสตร์และเทคโนโลยี" class="h-20 w-auto object-contain" onerror="this.src='https://placehold.co/80x80/b91c1c/ffffff?text=FET'">
+        </div>
+        <!-- Title Text -->
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-dark-950 tracking-tight flex flex-col sm:flex-row sm:items-center sm:gap-2">
+            <span class="text-brand-red-700">ฝึกประสบการณ์วิชาชีพ</span>
+          </h1>
+          <p class="text-xs sm:text-sm text-zinc-500 font-medium mt-1">
+            คณะวิศวกรรมศาสตร์และเทคโนโลยี มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน
+          </p>
+        </div>
+      </div>
+      
+      <!-- Quick Info / Portal Badge -->
+      <div class="hidden lg:flex items-center gap-3 bg-brand-dark-100/50 border border-zinc-200/60 rounded-xl p-3">
+        <div class="w-10 h-10 rounded-lg bg-brand-red-100 flex items-center justify-center text-brand-red-700">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+        </div>
+        <div>
+          <div class="text-xs text-zinc-500 font-medium">ระบบสนับสนุนการฝึกงาน</div>
+          <div class="text-sm font-bold text-brand-dark-900">FET Internship Portal</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="bg-brand-dark-900 sticky top-0 z-50 text-white shadow-md border-b border-brand-red-800/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-14">
+        
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center space-x-1 h-full font-medium text-sm">
+          <!-- Home -->
+          <a href="index.html" class="px-4 h-14 flex items-center text-zinc-300 hover:text-white hover:bg-brand-dark-800 transition-colors duration-200">
+            <i class="fa-solid fa-house mr-2"></i> HOME
+          </a>
+          
+          <!-- Dropdown: เกี่ยวกับเรา -->
+          <div class="relative group h-full">
+            <button class="px-4 h-14 flex items-center text-zinc-300 group-hover:text-white group-hover:bg-brand-dark-800 transition-colors duration-200">
+              เกี่ยวกับเรา <i class="fa-solid fa-chevron-down ml-1.5 text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 top-14 w-52 bg-brand-dark-900 border-t-2 border-brand-red-700 shadow-xl rounded-b-lg py-2 hidden group-hover:block transition-all duration-300">
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">ความเป็นมา</a>
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">บุคลากรที่เกี่ยวข้อง</a>
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">ระเบียบและแนวปฏิบัติ</a>
+            </div>
+          </div>
+
+          <!-- Dropdown: สำหรับบุคลากร -->
+          <div class="relative group h-full">
+            <button class="px-4 h-14 flex items-center text-zinc-300 group-hover:text-white group-hover:bg-brand-dark-800 transition-colors duration-200">
+              สำหรับบุคลากร <i class="fa-solid fa-chevron-down ml-1.5 text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 top-14 w-56 bg-brand-dark-900 border-t-2 border-brand-red-700 shadow-xl rounded-b-lg py-2 hidden group-hover:block transition-all duration-300">
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">อาจารย์นิเทศก์</a>
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">แบบฟอร์มประเมินผล</a>
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">คู่มือการใช้งานระบบ</a>
+            </div>
+          </div>
+
+          <!-- Dropdown: สำหรับนักศึกษา (Active Group) -->
+          <div class="relative group h-full bg-brand-dark-800">
+            <button class="px-5 h-14 flex items-center text-white font-semibold border-b-2 border-brand-red-500 shadow-inner">
+              สำหรับนักศึกษา <i class="fa-solid fa-chevron-down ml-1.5 text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 top-14 w-60 bg-brand-dark-900 border-t-2 border-brand-red-700 shadow-xl rounded-b-lg py-2 hidden group-hover:block transition-all duration-300">
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">ขั้นตอนการยื่นฝึกงาน</a>
+              <a href="download.html" class="block px-4 py-2 bg-brand-red-800/40 text-white font-medium hover:bg-brand-red-800 transition-colors">ดาวน์โหลดเอกสาร (คำร้อง)</a>
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">บันทึกสมุดฝึกงานออนไลน์</a>
+            </div>
+          </div>
+
+          <!-- Dropdown: สำหรับสถานประกอบการ -->
+          <div class="relative group h-full">
+            <button class="px-4 h-14 flex items-center text-zinc-300 group-hover:text-white group-hover:bg-brand-dark-800 transition-colors duration-200">
+              สำหรับสถานประกอบการ <i class="fa-solid fa-chevron-down ml-1.5 text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 top-14 w-64 bg-brand-dark-900 border-t-2 border-brand-red-700 shadow-xl rounded-b-lg py-2 hidden group-hover:block transition-all duration-300">
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">แจ้งความประสงค์รับนักศึกษา</a>
+              <a href="#" class="block px-4 py-2 text-zinc-300 hover:bg-brand-red-800 hover:text-white transition-colors">ประเมินนักศึกษาฝึกงาน</a>
+            </div>
+          </div>
+
+          <!-- Link: ติดต่อเรา -->
+          <a href="index.html" class="px-4 h-14 flex items-center text-zinc-300 hover:text-white hover:bg-brand-dark-800 transition-colors duration-200">
+            ติดต่อเรา
+          </a>
+        </div>
+
+        <!-- Right Menu Widget (Login Button) -->
+        <div class="hidden md:flex items-center">
+          <a href="#" class="bg-zinc-800 hover:bg-brand-red-700 text-zinc-100 hover:text-white px-4 py-1.5 rounded-lg text-xs font-semibold border border-zinc-700 hover:border-brand-red-500 transition-all duration-200 flex items-center gap-2">
+            <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
+            <span>เข้าสู่ระบบ Portal</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="flex md:hidden w-full justify-between items-center">
+          <span class="text-sm font-bold tracking-wide text-brand-red-500">MENU</span>
+          <button id="mobile-menu-btn" class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-brand-dark-800 focus:outline-none transition-colors" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-dark-900 border-t border-zinc-800 px-4 py-2 space-y-1">
+      <a href="index.html" class="block px-3 py-2 rounded-md text-zinc-300 hover:text-white hover:bg-brand-dark-800 font-medium">HOME</a>
+      
+      <!-- Mobile Submenus -->
+      <div class="border-t border-zinc-800/50 my-1"></div>
+      <div class="px-3 py-1 text-xs font-semibold text-zinc-500 uppercase tracking-wider">เกี่ยวกับเรา</div>
+      <a href="#" class="block pl-6 pr-3 py-2 rounded-md text-zinc-400 hover:text-white hover:bg-brand-dark-800 text-sm">ความเป็นมา</a>
+      <a href="#" class="block pl-6 pr-3 py-2 rounded-md text-zinc-400 hover:text-white hover:bg-brand-dark-800 text-sm">บุคลากรที่เกี่ยวข้อง</a>
+
+      <div class="border-t border-zinc-800/50 my-1"></div>
+      <div class="px-3 py-1 text-xs font-semibold text-zinc-500 uppercase tracking-wider">สำหรับบุคลากร</div>
+      <a href="#" class="block pl-6 pr-3 py-2 rounded-md text-zinc-400 hover:text-white hover:bg-brand-dark-800 text-sm">อาจารย์นิเทศก์</a>
+      <a href="#" class="block pl-6 pr-3 py-2 rounded-md text-zinc-400 hover:text-white hover:bg-brand-dark-800 text-sm">แบบฟอร์มประเมินผล</a>
+
+      <div class="border-t border-zinc-800/50 my-1"></div>
+      <div class="px-3 py-1 text-xs font-semibold text-zinc-500 uppercase tracking-wider text-brand-red-500">สำหรับนักศึกษา</div>
+      <a href="#" class="block pl-6 pr-3 py-2 rounded-md text-zinc-400 hover:text-white hover:bg-brand-dark-800 text-sm">ขั้นตอนการยื่นฝึกงาน</a>
+      <a href="download.html" class="block pl-6 pr-3 py-2 rounded-md bg-brand-red-800/40 text-white font-medium text-sm">ดาวน์โหลดเอกสาร (คำร้อง)</a>
+
+      <div class="border-t border-zinc-800/50 my-1"></div>
+      <div class="px-3 py-1 text-xs font-semibold text-zinc-500 uppercase tracking-wider">สำหรับสถานประกอบการ</div>
+      <a href="#" class="block pl-6 pr-3 py-2 rounded-md text-zinc-400 hover:text-white hover:bg-brand-dark-800 text-sm">แจ้งความประสงค์รับนักศึกษา</a>
+
+      <div class="border-t border-zinc-800/50 my-1"></div>
+      <a href="index.html" class="block px-3 py-2 rounded-md text-zinc-300 hover:text-white hover:bg-brand-dark-800 font-medium">ติดต่อเรา</a>
+      
+      <a href="#" class="block px-3 py-2 text-center rounded-md bg-zinc-800 text-zinc-100 font-medium border border-zinc-700 mt-3">
+        <i class="fa-solid fa-arrow-right-to-bracket mr-2"></i> เข้าสู่ระบบ Portal
+      </a>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMBS & HERO BANNER -->
+  <div class="relative bg-brand-dark-950 text-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <!-- Red glowing decorative background -->
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-red-950/80 via-brand-dark-950 to-brand-dark-950"></div>
+    <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-brand-red-900/10 blur-3xl"></div>
+    <div class="absolute left-10 -bottom-20 w-60 h-60 rounded-full bg-brand-red-800/15 blur-3xl"></div>
+    
+    <div class="relative max-w-7xl mx-auto">
+      <!-- Breadcrumbs -->
+      <nav class="flex text-xs sm:text-sm text-zinc-400 font-medium mb-3 items-center gap-2">
+        <a href="index.html" class="hover:text-brand-red-400 transition-colors">หน้าแรก</a>
+        <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i>
+        <span>สำหรับนักศึกษา</span>
+        <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i>
+        <span class="text-zinc-200">ดาวน์โหลดแบบคำร้อง</span>
+      </nav>
+      <!-- Title -->
+      <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-2">
+        Download คำร้อง
+      </h2>
+      <p class="text-zinc-400 max-w-xl text-sm sm:text-base">
+        ดาวน์โหลดแบบฟอร์มคำร้องเรียน เอกสารวิชาการ และคู่มือขั้นตอนการดำเนินเรื่องทางวิชาการและงานทะเบียน คณะวิศวกรรมศาสตร์และเทคโนโลยี
+      </p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- PAGE TITLE SECTION -->
+    <div class="mb-10">
+      <div class="flex items-center gap-3">
+        <div class="h-8 w-1.5 bg-brand-red-700 rounded-full"></div>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-brand-dark-950">ดาวน์โหลดเอกสารแบบคำร้อง</h3>
+      </div>
+      <p class="text-zinc-500 text-sm mt-1 ml-4.5">
+        คลิกที่ปุ่มไอคอนเพื่อดาวน์โหลดแบบฟอร์ม (PDF) หรือศึกษาขั้นตอนและคู่มือประกอบการเขียนคำร้อง (รูปภาพ)
+      </p>
+    </div>
+
+    <!-- MAIN TWO-COLUMN GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- LEFT COLUMN: REQUEST FORMS TABLE (8 cols) -->
+      <div class="lg:col-span-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200/70 overflow-hidden hover:shadow-md transition-shadow duration-300">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-brand-dark-950 text-white text-sm font-semibold border-b border-brand-red-900/30">
+                  <th class="px-6 py-4.5">รายการคำร้อง</th>
+                  <th class="px-6 py-4.5 text-center w-28">เอกสาร</th>
+                  <th class="px-6 py-4.5 text-center w-28">ขั้นตอน</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-zinc-100 text-sm font-medium text-brand-dark-900">
+                
+                <!-- Row R.01 -->
+                <tr class="hover:bg-zinc-50/80 transition-colors duration-150">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <span class="inline-flex items-center justify-center bg-zinc-100 text-zinc-700 font-bold px-2 py-0.5 rounded text-xs border border-zinc-200">R.01</span>
+                      <span class="hover:text-brand-red-700 transition-colors cursor-pointer">คำร้องทั่วไป</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <a href="form_editor.html" class="w-10 h-10 rounded-xl bg-red-50 hover:bg-brand-red-700 text-brand-red-600 hover:text-white border border-brand-red-200 hover:border-brand-red-500 shadow-sm hover:shadow-neon-red-hover flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="กรอกข้อมูลและดาวน์โหลด PDF">
+                      <i class="fa-regular fa-file-pdf text-lg"></i>
+                    </a>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="viewProcedureMock('R.01 คำร้องทั่วไป')" class="w-10 h-10 rounded-xl bg-sky-50 hover:bg-sky-600 text-sky-600 hover:text-white border border-sky-200 hover:border-sky-500 shadow-sm flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดูขั้นตอนประกอบ">
+                      <i class="fa-regular fa-image text-lg"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Row R.02 -->
+                <tr class="hover:bg-zinc-50/80 transition-colors duration-150">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <span class="inline-flex items-center justify-center bg-zinc-100 text-zinc-700 font-bold px-2 py-0.5 rounded text-xs border border-zinc-200">R.02</span>
+                      <span class="hover:text-brand-red-700 transition-colors cursor-pointer">คำร้องขอเอกสารทางการศึกษา</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="downloadMock('R.02 คำร้องขอเอกสารทางการศึกษา')" class="w-10 h-10 rounded-xl bg-red-50 hover:bg-brand-red-700 text-brand-red-600 hover:text-white border border-brand-red-200 hover:border-brand-red-500 shadow-sm hover:shadow-neon-red-hover flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดาวน์โหลดไฟล์ PDF">
+                      <i class="fa-regular fa-file-pdf text-lg"></i>
+                    </button>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="viewProcedureMock('R.02 คำร้องขอเอกสารทางการศึกษา')" class="w-10 h-10 rounded-xl bg-sky-50 hover:bg-sky-600 text-sky-600 hover:text-white border border-sky-200 hover:border-sky-500 shadow-sm flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดูขั้นตอนประกอบ">
+                      <i class="fa-regular fa-image text-lg"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Row R.03 -->
+                <tr class="hover:bg-zinc-50/80 transition-colors duration-150">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <span class="inline-flex items-center justify-center bg-zinc-100 text-zinc-700 font-bold px-2 py-0.5 rounded text-xs border border-zinc-200">R.03</span>
+                      <span class="hover:text-brand-red-700 transition-colors cursor-pointer">คำร้องขอลาออกจากการเป็นนักศึกษา</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="downloadMock('R.03 คำร้องขอลาออกจากการเป็นนักศึกษา')" class="w-10 h-10 rounded-xl bg-red-50 hover:bg-brand-red-700 text-brand-red-600 hover:text-white border border-brand-red-200 hover:border-brand-red-500 shadow-sm hover:shadow-neon-red-hover flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดาวน์โหลดไฟล์ PDF">
+                      <i class="fa-regular fa-file-pdf text-lg"></i>
+                    </button>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="viewProcedureMock('R.03 คำร้องขอลาออกจากการเป็นนักศึกษา')" class="w-10 h-10 rounded-xl bg-sky-50 hover:bg-sky-600 text-sky-600 hover:text-white border border-sky-200 hover:border-sky-500 shadow-sm flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดูขั้นตอนประกอบ">
+                      <i class="fa-regular fa-image text-lg"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Row R.04 -->
+                <tr class="hover:bg-zinc-50/80 transition-colors duration-150">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <span class="inline-flex items-center justify-center bg-zinc-100 text-zinc-700 font-bold px-2 py-0.5 rounded text-xs border border-zinc-200">R.04</span>
+                      <span class="hover:text-brand-red-700 transition-colors cursor-pointer">คำร้องขอลาพักการศึกษา/รักษาสถานภาพนักศึกษา</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="downloadMock('R.04 คำร้องขอลาพักการศึกษา/รักษาสถานภาพนักศึกษา')" class="w-10 h-10 rounded-xl bg-red-50 hover:bg-brand-red-700 text-brand-red-600 hover:text-white border border-brand-red-200 hover:border-brand-red-500 shadow-sm hover:shadow-neon-red-hover flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดาวน์โหลดไฟล์ PDF">
+                      <i class="fa-regular fa-file-pdf text-lg"></i>
+                    </button>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="viewProcedureMock('R.04 คำร้องขอลาพักการศึกษา/รักษาสถานภาพนักศึกษา')" class="w-10 h-10 rounded-xl bg-sky-50 hover:bg-sky-600 text-sky-600 hover:text-white border border-sky-200 hover:border-sky-500 shadow-sm flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดูขั้นตอนประกอบ">
+                      <i class="fa-regular fa-image text-lg"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Row R.05 -->
+                <tr class="hover:bg-zinc-50/80 transition-colors duration-150">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <span class="inline-flex items-center justify-center bg-zinc-100 text-zinc-700 font-bold px-2 py-0.5 rounded text-xs border border-zinc-200">R.05</span>
+                      <span class="hover:text-brand-red-700 transition-colors cursor-pointer">คำร้องขอกลับเข้าศึกษา</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="downloadMock('R.05 คำร้องขอกลับเข้าศึกษา')" class="w-10 h-10 rounded-xl bg-red-50 hover:bg-brand-red-700 text-brand-red-600 hover:text-white border border-brand-red-200 hover:border-brand-red-500 shadow-sm hover:shadow-neon-red-hover flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดาวน์โหลดไฟล์ PDF">
+                      <i class="fa-regular fa-file-pdf text-lg"></i>
+                    </button>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="viewProcedureMock('R.05 คำร้องขอกลับเข้าศึกษา')" class="w-10 h-10 rounded-xl bg-sky-50 hover:bg-sky-600 text-sky-600 hover:text-white border border-sky-200 hover:border-sky-500 shadow-sm flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดูขั้นตอนประกอบ">
+                      <i class="fa-regular fa-image text-lg"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Row R.06 -->
+                <tr class="hover:bg-zinc-50/80 transition-colors duration-150">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <span class="inline-flex items-center justify-center bg-zinc-100 text-zinc-700 font-bold px-2 py-0.5 rounded text-xs border border-zinc-200">R.06</span>
+                      <span class="hover:text-brand-red-700 transition-colors cursor-pointer">คำร้องขอคืนสถานภาพนักศึกษา</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="downloadMock('R.06 คำร้องขอคืนสถานภาพนักศึกษา')" class="w-10 h-10 rounded-xl bg-red-50 hover:bg-brand-red-700 text-brand-red-600 hover:text-white border border-brand-red-200 hover:border-brand-red-500 shadow-sm hover:shadow-neon-red-hover flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดาวน์โหลดไฟล์ PDF">
+                      <i class="fa-regular fa-file-pdf text-lg"></i>
+                    </button>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="viewProcedureMock('R.06 คำร้องขอคืนสถานภาพนักศึกษา')" class="w-10 h-10 rounded-xl bg-sky-50 hover:bg-sky-600 text-sky-600 hover:text-white border border-sky-200 hover:border-sky-500 shadow-sm flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดูขั้นตอนประกอบ">
+                      <i class="fa-regular fa-image text-lg"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Row R.07 -->
+                <tr class="hover:bg-zinc-50/80 transition-colors duration-150">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <span class="inline-flex items-center justify-center bg-zinc-100 text-zinc-700 font-bold px-2 py-0.5 rounded text-xs border border-zinc-200">R.07</span>
+                      <span class="hover:text-brand-red-700 transition-colors cursor-pointer">คำร้องขอเปลี่ยนแปลงข้อมูลในทะเบียนประวัตินักศึกษา</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="downloadMock('R.07 คำร้องขอเปลี่ยนแปลงข้อมูลในทะเบียนประวัตินักศึกษา')" class="w-10 h-10 rounded-xl bg-red-50 hover:bg-brand-red-700 text-brand-red-600 hover:text-white border border-brand-red-200 hover:border-brand-red-500 shadow-sm hover:shadow-neon-red-hover flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดาวน์โหลดไฟล์ PDF">
+                      <i class="fa-regular fa-file-pdf text-lg"></i>
+                    </button>
+                  </td>
+                  <td class="px-6 py-5 text-center">
+                    <button onclick="viewProcedureMock('R.07 คำร้องขอเปลี่ยนแปลงข้อมูลในทะเบียนประวัตินักศึกษา')" class="w-10 h-10 rounded-xl bg-sky-50 hover:bg-sky-600 text-sky-600 hover:text-white border border-sky-200 hover:border-sky-500 shadow-sm flex items-center justify-center mx-auto transition-all duration-300 hover:scale-105" title="ดูขั้นตอนประกอบ">
+                      <i class="fa-regular fa-image text-lg"></i>
+                    </button>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: SIDEBAR STAFF CARD (4 cols) -->
+      <aside class="lg:col-span-4 space-y-6">
+        
+        <!-- Dr. Ketukan Profile Card -->
+        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200/70 p-6 text-center hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+          <div class="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-brand-red-800 to-brand-red-600"></div>
+          
+          <!-- Avatar container -->
+          <div class="w-80 h-70 rounded-full overflow-hidden mx-auto border-4 border-brand-red-50/70 shadow-md mb-5 group-hover:scale-105 transition-transform duration-300 bg-zinc-100">
+            <img src="" alt="ดร.เกตุกาญจน์ โพธิจิตติการนต์" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/b91c1c/ffffff?text='">
+          </div>
+          
+          <!-- Details -->
+          <h4 class="text-lg font-bold text-brand-dark-950 leading-tight mb-1">
+            ดร.เกตุกาญจน์ โพธิจิตติการนต์
+          </h4>
+          <div class="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 text-zinc-600 border border-zinc-200">
+            รองผู้อำนวยการฝ่ายทะเบียนและประมวลผล
+          </div>
+          
+          <!-- Separator -->
+          <div class="border-t border-zinc-100 my-5"></div>
+          
+          <!-- Quick contact in card -->
+          <div class="text-xs text-zinc-500 font-medium space-y-2.5 text-left bg-zinc-50/50 p-4 rounded-xl border border-zinc-100">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-envelope text-brand-red-600 w-4"></i>
+              <span>ketukan.ph@rmuti.ac.th</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-phone text-brand-red-600 w-4"></i>
+              <span>0-4423-3073 ต่อ 2210</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-location-dot text-brand-red-600 w-4"></i>
+              <span>สำนักงานทะเบียนและประมวลผล ชั้น 1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Working Status / Alert Card -->
+        <div class="bg-brand-dark-900 rounded-2xl p-6 text-white relative overflow-hidden shadow-lg border border-brand-red-900/30">
+          <div class="absolute -right-10 -bottom-10 w-32 h-32 rounded-full bg-brand-red-800/10 blur-xl"></div>
+          <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-brand-red-500"></i>
+            <span>ข้อควรระวังในการยื่นคำร้อง</span>
+          </h4>
+          <ul class="text-zinc-400 text-xs space-y-2 font-normal leading-relaxed list-disc list-inside">
+            <li>นักศึกษาต้องลงลายมือชื่อตนเองด้วยปากกาสีน้ำเงินเท่านั้น (ห้ามใช้ลายเซ็นดิจิทัลที่ไม่ได้ยืนยันตัวตน)</li>
+            <li>การขอลาพักการศึกษาต้องได้รับความยินยอมและลงชื่อโดยผู้ปกครองด้วยเสมอ</li>
+            <li>กรุณายื่นคำร้องก่อนการสอบปลายภาคเรียนอย่างน้อย 2 สัปดาห์</li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- MODAL FOR SIMULATED ACTIONS -->
+  <div id="action-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-md w-full overflow-hidden border border-zinc-200 transform scale-95 transition-all duration-300">
+      <div class="bg-brand-dark-950 text-white p-5 flex justify-between items-center border-b border-brand-red-900/30">
+        <h5 id="modal-title" class="font-bold text-base flex items-center gap-2">
+          <!-- Dynamically inserted title -->
+        </h5>
+        <button onclick="closeModal()" class="text-zinc-400 hover:text-white transition-colors">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div class="p-6 text-center">
+        <div id="modal-icon" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+          <!-- Dynamically inserted icon -->
+        </div>
+        <p id="modal-body" class="text-zinc-600 text-sm font-medium leading-relaxed mb-6">
+          <!-- Dynamically inserted content -->
+        </p>
+        <button onclick="closeModal()" class="bg-brand-dark-900 hover:bg-brand-red-700 text-white font-bold px-6 py-2.5 rounded-xl transition-all duration-200">
+          ตกลง
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-dark-950 text-zinc-400 text-xs border-t border-zinc-800 pt-12 pb-6 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-zinc-800/80">
+        <!-- Brand/Description col -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <img src="img/ตราคณะ.png" alt="ตราคณะ" class="h-10 w-auto object-contain brightness-0 invert" onerror="this.src='https://placehold.co/80x80/b91c1c/ffffff?text=FET'">
+            <div class="font-bold text-white text-sm">
+              <p>คณะวิศวกรรมศาสตร์และเทคโนโลยี</p>
+              <p class="text-xs text-zinc-500 font-normal">มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน</p>
+            </div>
+          </div>
+          <p class="text-zinc-500 leading-relaxed font-normal">
+            มุ่งมั่นจัดการศึกษาที่เน้นพัฒนาบัณฑิตนักปฏิบัติให้มีความรู้ ความชำนาญการด้านเทคโนโลยี เพื่อรองรับการเจริญเติบโตของเศรษฐกิจและสังคมอย่างยั่งยืน
+          </p>
+        </div>
+
+        <!-- Links col 1 -->
+        <div class="md:col-span-3 space-y-3">
+          <h5 class="font-bold text-white text-sm">ลิงก์ที่เป็นประโยชน์</h5>
+          <ul class="space-y-2 font-medium">
+            <li><a href="#" class="hover:text-brand-red-400 transition-colors">เว็บบล็อกมหาวิทยาลัย (RMUTI)</a></li>
+            <li><a href="#" class="hover:text-brand-red-400 transition-colors">ระบบสำนักส่งเสริมวิชาการ</a></li>
+            <li><a href="#" class="hover:text-brand-red-400 transition-colors">สมาคมศิษย์เก่าวิศวกรรมศาสตร์</a></li>
+          </ul>
+        </div>
+
+        <!-- Links col 2 -->
+        <div class="md:col-span-4 space-y-3">
+          <h5 class="font-bold text-white text-sm">ระบบงานภายใน</h5>
+          <ul class="space-y-2 font-medium">
+            <li><a href="#" class="hover:text-brand-red-400 transition-colors">ระบบบริการการศึกษา (ESS)</a></li>
+            <li><a href="#" class="hover:text-brand-red-400 transition-colors">ระบบฐานข้อมูลฝึกงาน (FET Portal)</a></li>
+            <li><a href="#" class="hover:text-brand-red-400 transition-colors">นโยบายความเป็นส่วนตัว (Privacy Policy)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Copyright Area -->
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 text-zinc-500 font-medium">
+        <p>© 2026 Faculty of Engineering and Technology, RMUTI. All Rights Reserved.</p>
+        <p class="text-zinc-600">ออกแบบและตกแต่งด้วย <span class="text-brand-red-700">♥</span> และ Tailwind CSS</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ACTION LOGIC & MOBILE MENU TOGGLE JAVASCRIPT -->
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (mobileMenu.classList.contains('hidden')) {
+        icon.className = 'fa-solid fa-bars text-xl';
+      } else {
+        icon.className = 'fa-solid fa-xmark text-xl';
+      }
+    });
+
+    // Simulated modal actions
+    const modal = document.getElementById('action-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalIcon = document.getElementById('modal-icon');
+    const modalBody = document.getElementById('modal-body');
+
+    function openModal(title, iconClass, iconBg, message) {
+      modalTitle.innerHTML = title;
+      modalIcon.className = `w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl ${iconBg}`;
+      modalIcon.innerHTML = `<i class="${iconClass}"></i>`;
+      modalBody.innerHTML = message;
+      
+      modal.classList.remove('hidden');
+      // Smooth fade-in and scale up
+      setTimeout(() => {
+        modal.firstElementChild.classList.remove('scale-95');
+        modal.firstElementChild.classList.add('scale-100');
+      }, 50);
+    }
+
+    function closeModal() {
+      modal.firstElementChild.classList.remove('scale-100');
+      modal.firstElementChild.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150);
+    }
+
+    function downloadMock(formName) {
+      openModal(
+        'ดาวน์โหลดเอกสารสำเร็จ',
+        'fa-solid fa-cloud-arrow-down text-emerald-600',
+        'bg-emerald-50 border border-emerald-200',
+        `ระบบได้เตรียมไฟล์เอกสาร <strong>"${formName}"</strong> เรียบร้อยแล้ว ขณะนี้ไฟล์กำลังดาวน์โหลดลงในอุปกรณ์ของคุณ...`
+      );
+    }
+
+    function viewProcedureMock(formName) {
+      openModal(
+        'ขั้นตอนการยื่นคำร้อง',
+        'fa-regular fa-lightbulb text-amber-600',
+        'bg-amber-50 border border-amber-200',
+        `ขณะนี้หน้าแสดงแผนภาพขั้นตอนสำหรับ <strong>"${formName}"</strong> กำลังอยู่ในระหว่างการปรับปรุงข้อมูล หากมีข้อสงสัยกรุณาติดต่อสอบถามเพิ่มเติมที่เจ้าหน้าที่ฝ่ายทะเบียน`
+      );
+    }
+  </script>
+</body>
+</html>

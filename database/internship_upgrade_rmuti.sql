@@ -1,0 +1,36 @@
+ALTER TABLE internship_profile
+    ADD COLUMN IF NOT EXISTS year_level TINYINT NULL AFTER student_phone,
+    ADD COLUMN IF NOT EXISTS recipient_name VARCHAR(255) NULL AFTER year_level,
+    ADD COLUMN IF NOT EXISTS recipient_position VARCHAR(180) NULL AFTER recipient_name,
+    ADD COLUMN IF NOT EXISTS recipient_department VARCHAR(180) NULL AFTER recipient_position,
+    ADD COLUMN IF NOT EXISTS company_number VARCHAR(40) NULL AFTER recipient_department,
+    ADD COLUMN IF NOT EXISTS company_moo VARCHAR(40) NULL AFTER company_number,
+    ADD COLUMN IF NOT EXISTS company_building VARCHAR(180) NULL AFTER company_moo,
+    ADD COLUMN IF NOT EXISTS company_floor VARCHAR(40) NULL AFTER company_building,
+    ADD COLUMN IF NOT EXISTS company_road VARCHAR(180) NULL AFTER company_floor,
+    ADD COLUMN IF NOT EXISTS company_alley VARCHAR(180) NULL AFTER company_road,
+    ADD COLUMN IF NOT EXISTS company_email VARCHAR(255) NULL AFTER company_alley,
+    ADD COLUMN IF NOT EXISTS contact_department VARCHAR(180) NULL AFTER company_email,
+    ADD COLUMN IF NOT EXISTS contact_email VARCHAR(255) NULL AFTER contact_department,
+    ADD COLUMN IF NOT EXISTS qualification_department TINYINT(1) NOT NULL DEFAULT 0 AFTER contact_email,
+    ADD COLUMN IF NOT EXISTS qualification_preparation TINYINT(1) NOT NULL DEFAULT 0 AFTER qualification_department,
+    ADD COLUMN IF NOT EXISTS qualification_gpa TINYINT(1) NOT NULL DEFAULT 0 AFTER qualification_preparation,
+    ADD COLUMN IF NOT EXISTS qualification_company TINYINT(1) NOT NULL DEFAULT 0 AFTER qualification_gpa;
+
+CREATE TABLE IF NOT EXISTS internship_application (
+    internship_application_id INT AUTO_INCREMENT PRIMARY KEY,
+    internship_profile_id INT NOT NULL,
+    document_id INT NOT NULL,
+    request_date DATE NOT NULL,
+    contact_status ENUM('contacted','not_contacted') NOT NULL DEFAULT 'not_contacted',
+    delivery_method ENUM('student','faculty') NOT NULL DEFAULT 'faculty',
+    status ENUM('draft','in_review','waiting_signature','submitted') NOT NULL DEFAULT 'draft',
+    signed_file VARCHAR(255) NULL,
+    submitted_at DATETIME NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_internship_application_profile (internship_profile_id),
+    UNIQUE KEY uq_internship_application_document (document_id),
+    CONSTRAINT fk_internship_application_profile FOREIGN KEY (internship_profile_id) REFERENCES internship_profile(internship_profile_id) ON DELETE CASCADE,
+    CONSTRAINT fk_internship_application_document FOREIGN KEY (document_id) REFERENCES documents(document_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

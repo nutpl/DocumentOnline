@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS internship_excel_sync (
+    sync_id INT AUTO_INCREMENT PRIMARY KEY,
+    department_id INT NOT NULL,
+    connected_by_user_id INT NOT NULL,
+    refresh_token_encrypted TEXT NOT NULL,
+    access_token_encrypted TEXT NULL,
+    access_token_expires_at DATETIME NULL,
+    drive_id VARCHAR(255) NULL,
+    item_id VARCHAR(255) NULL,
+    workbook_name VARCHAR(255) NULL,
+    worksheet_name VARCHAR(255) NULL,
+    share_url TEXT NULL,
+    last_synced_at DATETIME NULL,
+    last_sync_status VARCHAR(20) NULL,
+    last_sync_message TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_internship_excel_department (department_id),
+    CONSTRAINT fk_internship_excel_department FOREIGN KEY (department_id) REFERENCES department(department_id) ON DELETE CASCADE,
+    CONSTRAINT fk_internship_excel_user FOREIGN KEY (connected_by_user_id) REFERENCES users(user_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

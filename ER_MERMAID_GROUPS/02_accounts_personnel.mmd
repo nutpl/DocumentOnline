@@ -1,0 +1,108 @@
+erDiagram
+    department {
+        int department_id PK
+        int faculty_id FK
+        varchar department_abbreviation
+        varchar department_name
+    }
+    prefixes {
+        int prefix_id PK
+        varchar prefix_name
+        varchar prefix_short
+        enum status
+        timestamp created_at
+    }
+    positions {
+        int position_id PK
+        varchar position_name
+    }
+    users {
+        int user_id PK
+        varchar username
+        varchar email
+        varchar password
+        tinyint first_login
+        enum status
+        char active_session_token_hash
+        datetime active_session_at
+        timestamp created_at
+    }
+    user_roles {
+        int user_role_id PK
+        int user_id FK
+        enum role
+    }
+    password_reset_otp {
+        int otp_id PK
+        int user_id FK
+        varchar otp_code
+        datetime expire_at
+        tinyint used
+        timestamp created_at
+    }
+    activity_log {
+        bigint log_id PK
+        int user_id FK
+        varchar activity
+        text detail
+        timestamp activity_time
+    }
+    employee {
+        int employee_id PK
+        int user_id FK
+        varchar employee_code
+        int prefix_id FK
+        varchar firstname
+        varchar lastname
+        varchar phone
+        int department_id FK
+        enum employee_type
+        timestamp created_at
+    }
+    employee_position {
+        int employee_position_id PK
+        int employee_id FK
+        int position_id FK
+        tinyint is_primary
+    }
+    student {
+        int student_id PK
+        int user_id FK
+        varchar student_number
+        int prefix_id FK
+        varchar firstname
+        varchar lastname
+        int group_id FK
+    }
+    office_holders {
+        int office_holder_id PK
+        int position_id FK
+        int employee_id FK
+        varchar holder_name
+        int department_id FK
+        date effective_from
+        date effective_to
+        tinyint is_active
+        varchar signature_title_line1
+        varchar signature_title_line2
+        int created_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    department o|--o{ users : "สังกัดหลัก"
+    department ||--o{ employee : "มีบุคลากร"
+    users ||--o{ user_roles : "มีบทบาท"
+    users ||--o{ password_reset_otp : "ขอรีเซ็ตรหัสผ่าน"
+    users o|--o{ activity_log : "ทำกิจกรรม"
+    users o|--o| employee : "บัญชีบุคลากร"
+    users o|--o| student : "บัญชีนักศึกษา"
+    prefixes o|--o{ employee : "คำนำหน้า"
+    prefixes o|--o{ student : "คำนำหน้า"
+    employee ||--o{ employee_position : "มีตำแหน่ง"
+    positions ||--o{ employee_position : "กำหนดตำแหน่ง"
+    positions ||--o{ office_holders : "กำหนดผู้ดำรงตำแหน่ง"
+    employee o|--o{ office_holders : "เป็นผู้ดำรงตำแหน่ง"
+    department o|--o{ office_holders : "ขอบเขตสังกัด"
+    users o|--o{ office_holders : "ผู้บันทึก"
+

@@ -1,0 +1,158 @@
+erDiagram
+    users {
+        int user_id PK
+        varchar username
+        varchar email
+        varchar password
+        tinyint first_login
+        enum status
+        char active_session_token_hash
+        datetime active_session_at
+        timestamp created_at
+    }
+    employee {
+        int employee_id PK
+        int user_id FK
+        varchar employee_code
+        int prefix_id FK
+        varchar firstname
+        varchar lastname
+        varchar phone
+        int department_id FK
+        enum employee_type
+        timestamp created_at
+    }
+    department {
+        int department_id PK
+        int faculty_id FK
+        varchar department_abbreviation
+        varchar department_name
+    }
+    internship_profile {
+        int internship_profile_id PK
+        int student_id FK
+        enum request_status
+        enum request_reason
+        int previous_profile_id FK
+        varchar closed_reason
+        datetime closed_at
+        int calendar_id FK
+        varchar student_phone
+        tinyint year_level
+        varchar recipient_name
+        varchar company_name
+        text company_address
+        varchar subdistrict
+        varchar district
+        varchar province
+        varchar postal_code
+        varchar company_phone
+        varchar company_fax
+        varchar contact_prefix
+        varchar contact_name
+        varchar contact_position
+        varchar contact_phone
+        varchar job_position
+        text job_description
+        varchar capacity_note
+        varchar recipient_position
+        varchar recipient_department
+        varchar company_number
+        varchar company_moo
+        varchar company_building
+        varchar company_floor
+        varchar company_road
+        varchar company_alley
+        varchar company_email
+        varchar contact_department
+        varchar contact_email
+        tinyint qualification_department
+        tinyint qualification_preparation
+        tinyint qualification_gpa
+        tinyint qualification_company
+        timestamp updated_at
+        timestamp created_at
+    }
+    internship_tracking {
+        int internship_tracking_id PK
+        int internship_profile_id FK
+        enum request_letter_status
+        enum response_status
+        enum application_status
+        enum send_letter_status
+        enum employment_status
+        text notes
+        int updated_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+    internship_supervision {
+        int internship_supervision_id PK
+        int internship_profile_id FK
+        int supervisor_employee_id FK
+        date visit1_date
+        time visit1_time
+        enum visit1_mode
+        date visit2_date
+        time visit2_time
+        enum visit2_mode
+        text supervisor_names
+        int updated_by FK
+        int lock_version
+        timestamp updated_at
+    }
+    internship_direct_send_import {
+
+    }
+    internship_official_document {
+        int official_document_id PK
+        enum document_type
+        varchar company_name
+        varchar document_number
+        date document_date
+        varchar recipient_name
+        varchar reference_text
+        date response_due_date
+        varchar signatory_name
+        varchar signatory_title_line1
+        varchar signatory_title_line2
+        int created_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+    internship_official_student {
+        int official_document_id PK, FK
+        int internship_profile_id PK, FK
+        smallint sequence_no
+    }
+    internship_excel_sync {
+        int sync_id PK
+        int department_id FK
+        int connected_by_user_id FK
+        text refresh_token_encrypted
+        text access_token_encrypted
+        datetime access_token_expires_at
+        varchar drive_id
+        varchar item_id
+        varchar workbook_name
+        varchar worksheet_name
+        text share_url
+        datetime last_synced_at
+        varchar last_sync_status
+        text last_sync_message
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    internship_profile ||--o| internship_tracking : "ติดตามผล"
+    users o|--o{ internship_tracking : "ผู้ปรับปรุง"
+    internship_profile ||--o{ internship_supervision : "แผนนิเทศ"
+    employee o|--o{ internship_supervision : "ผู้นิเทศ"
+    users o|--o{ internship_supervision : "ผู้บันทึก"
+    internship_profile ||--o| internship_direct_send_import : "นำเข้ากรณีออกใบส่งตัวโดยตรง"
+    users ||--o{ internship_official_document : "สร้างหนังสือ"
+    internship_official_document ||--o{ internship_official_student : "มีรายชื่อนักศึกษา"
+    internship_profile ||--o{ internship_official_student : "ปรากฏในหนังสือ"
+    department ||--o{ internship_excel_sync : "ตั้งค่าการเชื่อม Excel"
+    users ||--o{ internship_excel_sync : "ผู้เชื่อมข้อมูล"
+

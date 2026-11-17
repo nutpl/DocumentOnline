@@ -1,0 +1,576 @@
+@font-face {
+    font-family: "TH Sarabun PSK";
+    src: url("../fonts/thsarabunpsk/THSarabun.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TH Sarabun PSK";
+    src: url("../fonts/thsarabunpsk/THSarabun-Bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TH Sarabun PSK";
+    src: url("../fonts/thsarabunpsk/THSarabun-Italic.ttf") format("truetype");
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TH Sarabun PSK";
+    src: url("../fonts/thsarabunpsk/THSarabun-BoldItalic.ttf") format("truetype");
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+}
+
+:root {
+    color-scheme: light;
+}
+
+html {
+    min-width: 320px;
+    overflow-x: hidden;
+    font-size: 17px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    min-width: 320px;
+    overflow-x: hidden;
+    font-family: "TH Sarabun PSK", Tahoma, "Noto Sans Thai", sans-serif;
+    font-size: 22px;
+}
+
+/* Some standalone pages use Tailwind without app-ui.css. Match their text utilities to TH Sarabun PSK's compact proportions. */
+.text-xs { font-size: 18px !important; }
+.text-sm { font-size: 20px !important; }
+.text-base { font-size: 22px !important; }
+.text-lg { font-size: 24px !important; }
+.text-xl { font-size: 27px !important; }
+.text-2xl { font-size: 31px !important; }
+.text-3xl { font-size: 36px !important; }
+.text-4xl { font-size: 42px !important; }
+
+main,
+header,
+header > *,
+section,
+article,
+form,
+.min-h-screen {
+    min-width: 0;
+}
+
+img,
+svg,
+video,
+canvas {
+    max-width: 100%;
+}
+
+input,
+select,
+textarea,
+button {
+    max-width: 100%;
+    font: inherit;
+}
+
+button,
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+select,
+textarea {
+    min-height: 2.75rem;
+}
+
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.swal2-popup {
+    font-family: "TH Sarabun PSK", Tahoma, "Noto Sans Thai", sans-serif !important;
+    font-size: 22px !important;
+}
+
+.swal2-title { font-size: 34px !important; line-height: 1.2 !important; }
+.swal2-html-container { font-size: 22px !important; line-height: 1.35 !important; }
+.swal2-actions .swal2-styled { font-size: 21px !important; font-family: inherit !important; }
+
+/* The Instagram/iOS in-app browser can stretch SweetAlert popups to the
+   available viewport height.  Logout is a short confirmation, so always keep
+   it sized to its contents. */
+.swal2-popup.logout-confirm-popup {
+    width: min(30rem, calc(100vw - 2rem)) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: calc(100dvh - 2rem) !important;
+    padding: 1.4rem 1.5rem !important;
+    align-content: start !important;
+    overflow-y: auto !important;
+}
+
+/* Authentication alerts must remain a compact card on iPad Safari.  Without
+   an explicit content height, some in-app WebKit views stretch a normal
+   SweetAlert popup across almost the entire viewport. */
+.swal2-popup.auth-alert-popup {
+    width: min(30rem, calc(100vw - 2rem)) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: calc(100dvh - 2rem) !important;
+    padding: 1.4rem 1.5rem !important;
+    align-content: start !important;
+    overflow-y: auto !important;
+}
+
+.swal2-container:has(.auth-alert-popup) {
+    box-sizing: border-box !important;
+    min-height: 0 !important;
+    padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left)) !important;
+    overflow-y: auto !important;
+}
+
+.swal2-popup.auth-alert-popup .swal2-icon {
+    width: 4.2em !important;
+    height: 4.2em !important;
+    margin: .25em auto .55em !important;
+}
+
+.swal2-container:has(.logout-confirm-popup) {
+    box-sizing: border-box !important;
+    min-height: 0 !important;
+    padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left)) !important;
+    overflow-y: auto !important;
+}
+
+.swal2-popup.logout-confirm-popup .swal2-icon {
+    width: 4.5em !important;
+    height: 4.5em !important;
+    margin: .35em auto .55em !important;
+}
+
+.swal2-popup.logout-confirm-popup .swal2-actions {
+    margin: 1rem auto 0 !important;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.overflow-x-auto {
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+}
+
+.responsive-table-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+}
+
+.responsive-table-scroll > table {
+    min-width: max-content;
+}
+
+pre,
+code,
+.break-responsive {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+@media (max-width: 639px) {
+    body {
+        font-size: 21px;
+    }
+
+    .text-xs { font-size: 17px !important; }
+    .text-sm { font-size: 19px !important; }
+    .text-base { font-size: 21px !important; }
+    .text-lg { font-size: 23px !important; }
+    .text-xl { font-size: 25px !important; }
+    .text-2xl { font-size: 29px !important; }
+    .text-3xl { font-size: 34px !important; }
+    header {
+        column-gap: .5rem;
+    }
+
+    header h1 {
+        max-width: min(58vw, 20rem);
+    }
+
+    main {
+        max-width: 100vw;
+    }
+
+    main {
+        padding-inline: 1rem !important;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+
+    .responsive-table-scroll,
+    .overflow-x-auto {
+        margin-inline: -1rem;
+        width: calc(100% + 2rem);
+    }
+
+    /* Preserve column widths instead of squeezing labels until unreadable. */
+    .responsive-table-scroll > table,
+    .overflow-x-auto > table {
+        min-width: max-content;
+    }
+
+    .swal2-popup {
+        width: calc(100vw - 2rem) !important;
+        padding: 1.25rem !important;
+        font-size: 21px !important;
+    }
+
+    .swal2-popup.logout-confirm-popup {
+        width: calc(100vw - 2rem) !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: calc(100dvh - 2rem) !important;
+        padding: 1.15rem 1rem !important;
+        overflow-y: auto !important;
+    }
+
+    .swal2-popup.auth-alert-popup {
+        width: calc(100vw - 2rem) !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: calc(100dvh - 2rem) !important;
+        padding: 1.15rem 1rem !important;
+        overflow-y: auto !important;
+    }
+
+    .swal2-popup.auth-alert-popup .swal2-icon {
+        width: 3.6em !important;
+        height: 3.6em !important;
+        margin: .2em auto .45em !important;
+    }
+
+    .swal2-popup.logout-confirm-popup .swal2-icon {
+        width: 3.6em !important;
+        height: 3.6em !important;
+        margin: .2em auto .45em !important;
+    }
+
+    .swal2-title { font-size: 30px !important; }
+    .swal2-html-container { font-size: 21px !important; }
+    .swal2-actions .swal2-styled { font-size: 20px !important; }
+
+    .swal2-actions {
+        width: 100%;
+        gap: .5rem;
+    }
+
+    .swal2-actions button {
+        flex: 1 1 8rem;
+        margin: 0 !important;
+    }
+
+    .management-hero {
+        flex-wrap: wrap;
+        gap: .8rem;
+        padding: 1.1rem 1rem 1.1rem 1.3rem;
+    }
+
+    .management-hero__icon {
+        height: 2.45rem;
+        width: 2.45rem;
+    }
+
+    /* A full-width count badge must form a second row.  Without a flexible
+       basis for the title block, flex squeezes Thai text one character wide. */
+    .management-hero > .min-w-0.flex-1 {
+        flex: 1 1 calc(100% - 3.3rem);
+    }
+
+    .management-hero > .inline-flex:last-child {
+        flex: 1 0 100%;
+        width: auto;
+        justify-content: flex-start;
+        margin-left: 3.3rem;
+    }
+
+    /* Keep sticky form actions clear of the iOS home indicator. */
+    main .sticky.bottom-4 {
+        bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    /* Long file names and Thai names must not widen the app canvas. */
+    main :is(.break-words, .break-all, .truncate) {
+        max-width: 100%;
+    }
+
+    /* The long system description is useful on desktop but consumes the
+       mobile app bar.  Keep the navigation, notification, and profile taps
+       clear instead. */
+    #staff-sidebar ~ .min-h-screen > header > div:first-child > div > p {
+        display: none;
+    }
+
+    /* Tracking rows are already stacked by their Tailwind layout at this
+       width; let their update controls wrap instead of pushing off-screen. */
+    #tracking-list details > div > .mt-4.flex {
+        flex-wrap: wrap;
+    }
+
+    [role="dialog"],
+    .modal-content,
+    .fixed.inset-0 > .rounded-2xl,
+    .fixed.inset-0 > .rounded-3xl {
+        max-height: calc(100dvh - 2rem);
+        max-width: calc(100vw - 2rem);
+        overflow-y: auto;
+    }
+}
+
+/*
+ * A 10–11 inch tablet in landscape is commonly 1024px wide.  Treating it as
+ * a desktop leaves only about 736px after the permanent sidebar, which makes
+ * forms and data tables unnecessarily cramped.  These layouts therefore keep
+ * the sidebar off-canvas until there is enough workspace for both columns.
+ */
+@media (min-width: 1024px) and (max-width: 1100px) {
+    body:has(#student-sidebar),
+    body:has(#teacher-sidebar),
+    body:has(#staff-sidebar),
+    body:has(#admin-sidebar) {
+        height: auto !important;
+        min-height: 100dvh;
+        overflow-y: auto !important;
+    }
+
+    #student-sidebar,
+    #teacher-sidebar,
+    #staff-sidebar,
+    #admin-sidebar {
+        transform: translateX(-100%) !important;
+    }
+
+    #student-sidebar:not(.-translate-x-full),
+    #teacher-sidebar:not(.-translate-x-full),
+    #staff-sidebar:not(.-translate-x-full),
+    #admin-sidebar:not(.-translate-x-full) {
+        transform: translateX(0) !important;
+    }
+
+    #student-sidebar-overlay:not(.hidden),
+    #teacher-sidebar-overlay:not(.hidden),
+    #staff-sidebar-overlay:not(.hidden),
+    #admin-sidebar-overlay:not(.hidden) {
+        display: block !important;
+    }
+
+    #student-sidebar ~ .min-h-screen,
+    #teacher-sidebar ~ .min-h-screen,
+    #staff-sidebar ~ .min-h-screen,
+    #admin-sidebar ~ .min-h-screen {
+        height: auto !important;
+        min-height: 100dvh;
+        margin-left: 0 !important;
+    }
+
+    #student-sidebar-open,
+    #teacher-sidebar-open,
+    #staff-sidebar-open,
+    #sidebar-toggle {
+        display: inline-flex !important;
+    }
+
+    #student-sidebar-collapse,
+    #teacher-sidebar-collapse,
+    #staff-sidebar-collapse,
+    #admin-sidebar-collapse {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1100px) {
+    #student-sidebar,
+    #teacher-sidebar,
+    #staff-sidebar,
+    #admin-sidebar {
+        height: 100dvh;
+        width: min(18rem, calc(100vw - max(.75rem, env(safe-area-inset-left))));
+        overscroll-behavior: contain;
+    }
+
+    .student-sidebar-footer,
+    .teacher-sidebar-footer,
+    .staff-sidebar-footer,
+    .admin-sidebar-footer {
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+}
+
+/* At 1024–1100px the navigation remains off canvas, so retain a visible
+   close control even though Tailwind's lg:hidden utility is active. */
+@media (min-width: 1024px) and (max-width: 1100px) {
+    #student-sidebar-close,
+    #teacher-sidebar-close,
+    #staff-sidebar-close,
+    #admin-sidebar-close {
+        display: inline-flex !important;
+    }
+}
+
+/* Tablet and phone QA baseline: dialogs must remain reachable and tables must
+   scroll inside their own surface instead of widening the whole application. */
+@media (max-width: 1023px) {
+    [role="dialog"]:not(.swal2-container) {
+        padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+    }
+
+    [role="dialog"]:not(.swal2-container) > div {
+        min-height: 100%;
+    }
+
+    [role="dialog"]:not(.swal2-container) :is(section, .modal-content) {
+        width: 100%;
+        max-height: calc(100dvh - 2rem);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    /* SweetAlert uses role="dialog" too, but confirmation popups must size
+       to their content rather than inherit full-height application modals. */
+    .swal2-container[role="dialog"] > .swal2-popup.logout-confirm-popup {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: calc(100dvh - 2rem) !important;
+    }
+
+    /* Keep action rows usable when a wide desktop table is displayed. */
+    .overflow-x-auto > table :is(button, a) {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 767px) {
+    /* Keep every header control reachable on a phone. */
+    #student-sidebar ~ .min-h-screen > header,
+    #teacher-sidebar ~ .min-h-screen > header,
+    #staff-sidebar ~ .min-h-screen > header,
+    #admin-sidebar ~ .min-h-screen > header {
+        height: auto !important;
+        min-height: 4.25rem;
+        padding: .55rem .75rem !important;
+        gap: .5rem;
+    }
+
+    #student-sidebar ~ .min-h-screen > header > div:last-child,
+    #teacher-sidebar ~ .min-h-screen > header > div:last-child,
+    #staff-sidebar ~ .min-h-screen > header > div:last-child,
+    #admin-sidebar ~ .min-h-screen > header > div:last-child {
+        margin-left: auto;
+        gap: .4rem !important;
+    }
+
+    #teacher-sidebar ~ .min-h-screen > header > div:first-child > div > p,
+    #admin-sidebar ~ .min-h-screen > header > div:first-child > div > p {
+        display: none;
+    }
+
+    .role-switcher,
+    .theme-toggle,
+    [data-notification-toggle],
+    [data-activity-history-toggle] {
+        height: 2.6rem !important;
+        width: 2.6rem;
+        min-height: 2.6rem !important;
+    }
+
+    .role-switcher { flex: 0 0 2.6rem; }
+    .role-switcher__summary { justify-content: center; padding: .25rem; }
+    .role-switcher__icon { width: 1.9rem; height: 1.9rem; }
+    .role-switcher__current,
+    .role-switcher__chevron { display: none; }
+    .role-switcher__menu {
+        position: fixed;
+        right: max(.75rem, env(safe-area-inset-right));
+        top: 4.15rem;
+        min-width: min(17rem, calc(100vw - 1.5rem));
+    }
+
+    [data-notification-popover],
+    [data-activity-history-popover] {
+        position: fixed !important;
+        top: 4.15rem !important;
+        right: max(.75rem, env(safe-area-inset-right)) !important;
+        width: min(30rem, calc(100vw - 1.5rem)) !important;
+        max-height: calc(100dvh - 5rem);
+    }
+
+    [data-notification-popover] > div,
+    [data-activity-history-popover] > div { max-height: calc(100dvh - 10rem) !important; }
+
+    /* Avoid clipped, side-by-side action buttons on small touch screens. */
+    main :is(.flex, .inline-flex).justify-between > .flex:only-child {
+        min-width: 0;
+    }
+
+    [role="dialog"] .grid.md\:grid-cols-2,
+    [role="dialog"] .grid.lg\:grid-cols-2,
+    [role="dialog"] .grid.xl\:grid-cols-3 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* iPad portrait and landscape: retain the full workspace while ensuring
+   popovers never extend beyond the available viewport. */
+@media (min-width: 768px) and (max-width: 1023px) {
+    #student-sidebar ~ .min-h-screen > header,
+    #teacher-sidebar ~ .min-h-screen > header,
+    #staff-sidebar ~ .min-h-screen > header,
+    #admin-sidebar ~ .min-h-screen > header { padding-inline: 1.25rem !important; }
+
+    [data-notification-popover],
+    [data-activity-history-popover] {
+        width: min(32rem, calc(100vw - 2rem)) !important;
+        max-height: calc(100dvh - 6rem);
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    button,
+    input,
+    select,
+    textarea,
+    a {
+        touch-action: manipulation;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}

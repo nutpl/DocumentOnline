@@ -1,0 +1,46 @@
+erDiagram
+    faculty {
+        int faculty_id PK
+        varchar faculty_abbreviation
+        varchar faculty_name
+    }
+    department {
+        int department_id PK
+        int faculty_id FK
+        varchar department_abbreviation
+        varchar department_name
+    }
+    group_class {
+        int group_id PK
+        int department_id FK
+        varchar group_name
+        int advisor_employee_id FK
+    }
+    employee {
+        int employee_id PK
+        int user_id FK
+        varchar employee_code
+        int prefix_id FK
+        varchar firstname
+        varchar lastname
+        varchar phone
+        int department_id FK
+        enum employee_type
+        timestamp created_at
+    }
+    student {
+        int student_id PK
+        int user_id FK
+        varchar student_number
+        int prefix_id FK
+        varchar firstname
+        varchar lastname
+        int group_id FK
+    }
+
+    faculty ||--o{ department : "มีสาขา"
+    department ||--o{ group_class : "มีกลุ่มเรียน"
+    department ||--o{ employee : "มีบุคลากร"
+    group_class o|--o{ student : "มีนักศึกษา"
+    employee o|--o{ group_class : "อาจารย์ที่ปรึกษากลุ่ม"
+

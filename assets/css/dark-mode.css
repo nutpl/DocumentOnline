@@ -1,0 +1,275 @@
+/* Theme is stored in localStorage and is shared by every portal in this browser. */
+html.theme-dark,
+body.theme-dark {
+    --app-ink: #f8fafc;
+    --app-muted: #cbd5e1;
+    --app-line: #334155;
+    --app-surface: #1f2937;
+    --app-background: #111827;
+    background: #111827 !important;
+    color: #e5e7eb;
+}
+
+body.theme-dark .bg-white,
+body.theme-dark .bg-white\/95,
+body.theme-dark .bg-white\/90,
+body.theme-dark .bg-gray-50,
+body.theme-dark .bg-slate-50 { background-color: #1f2937 !important; }
+body.theme-dark .bg-gray-100,
+body.theme-dark .bg-slate-100 { background-color: #111827 !important; }
+body.theme-dark .bg-gray-950,
+body.theme-dark .bg-slate-950 { background-color: #1b2638 !important; }
+body.theme-dark .bg-gray-50\/40,
+body.theme-dark .bg-slate-50\/40 { background-color: rgba(30, 41, 59, .72) !important; }
+body.theme-dark .bg-slate-50\/70 { background-color: #1f2937 !important; }
+body.theme-dark .border,
+body.theme-dark .border-b,
+body.theme-dark .border-t,
+body.theme-dark .border-r,
+body.theme-dark .border-l,
+body.theme-dark .border-gray-100,
+body.theme-dark .border-gray-200,
+body.theme-dark .border-gray-300,
+body.theme-dark .border-slate-100,
+body.theme-dark .border-slate-200,
+body.theme-dark .border-slate-300 { border-color: #334155 !important; }
+body.theme-dark .text-gray-900,
+body.theme-dark .text-gray-950,
+body.theme-dark .text-slate-900,
+body.theme-dark .text-slate-800,
+body.theme-dark .text-gray-800 { color: #f8fafc !important; }
+body.theme-dark .text-gray-700,
+body.theme-dark .text-slate-700,
+body.theme-dark .text-gray-600,
+body.theme-dark .text-slate-600 { color: #cbd5e1 !important; }
+body.theme-dark .text-gray-500,
+body.theme-dark .text-slate-500,
+body.theme-dark .text-gray-400,
+body.theme-dark .text-slate-400,
+body.theme-dark .text-gray-300,
+body.theme-dark .text-slate-300 { color: #cbd5e1 !important; }
+body.theme-dark input,
+body.theme-dark select,
+body.theme-dark textarea { background-color: #111827 !important; color: #f8fafc !important; border-color: #475569 !important; }
+body.theme-dark input::placeholder,
+body.theme-dark textarea::placeholder { color: #94a3b8 !important; }
+body.theme-dark table thead,
+body.theme-dark thead.bg-gray-50 { background-color: #1e293b !important; }
+body.theme-dark tr:hover { background-color: rgba(51, 65, 85, .45) !important; }
+body.theme-dark .hover\:bg-slate-50:hover,
+body.theme-dark .hover\:bg-gray-50:hover { background-color: #263248 !important; }
+body.theme-dark .bg-red-50,
+body.theme-dark .bg-red-50\/40,
+body.theme-dark .bg-red-50\/70 { background-color: rgba(127, 29, 29, .28) !important; }
+body.theme-dark .bg-emerald-50 { background-color: rgba(6, 78, 59, .28) !important; }
+body.theme-dark .bg-amber-50 { background-color: rgba(120, 53, 15, .28) !important; }
+body.theme-dark .shadow-sm,
+body.theme-dark .shadow,
+body.theme-dark .shadow-md,
+body.theme-dark .shadow-lg { box-shadow: 0 2px 8px rgba(0, 0, 0, .28) !important; }
+body.theme-dark [data-theme-toggle] { background: #1e293b !important; border-color: #475569 !important; color: #facc15 !important; }
+
+/* The portal shells use explicit light surfaces in app-ui.css.  Override those
+   shell-level surfaces here so a dark theme never leaves a white canvas around
+   the content or the institutional logo. */
+body.theme-dark #admin-sidebar ~ .min-h-screen,
+body.theme-dark #staff-sidebar ~ .min-h-screen,
+body.theme-dark #teacher-sidebar ~ .min-h-screen,
+body.theme-dark #student-sidebar ~ .min-h-screen { background: #111827 !important; }
+body.theme-dark #staff-sidebar,
+body.theme-dark #teacher-sidebar,
+body.theme-dark #student-sidebar { background: #1f2937 !important; border-color: #334155 !important; }
+
+/* Student profile: the information cards use a translucent slate utility in
+   light mode. Give them a proper dark surface rather than a pale grey card. */
+body.theme-dark .profile-hero ~ div article.bg-slate-50\/70 {
+    background-color: #1f2937 !important;
+    border-color: #334155 !important;
+}
+body.theme-dark .profile-hero ~ div article.bg-slate-50\/70:hover {
+    background-color: #263248 !important;
+    border-color: #f87171 !important;
+}
+
+/* admin.css intentionally gives the administration sidebar an ID-based white
+   background.  Match that specificity here so dark mode covers its brand,
+   navigation, and sign-out area as one surface. */
+body.theme-dark #admin-sidebar,
+body.theme-dark #admin-sidebar .bg-gray-900,
+body.theme-dark #admin-sidebar .bg-transparent,
+body.theme-dark #admin-sidebar .bg-white,
+body.theme-dark #admin-sidebar .admin-sidebar-brand {
+    background: #1f2937 !important;
+    background-color: #1f2937 !important;
+    border-color: #334155 !important;
+}
+body.theme-dark #admin-sidebar .admin-sidebar-title h2,
+body.theme-dark #admin-sidebar nav a,
+body.theme-dark #admin-sidebar .admin-menu-group summary,
+body.theme-dark #admin-sidebar .admin-sidebar-footer a { color: #e2e8f0 !important; }
+body.theme-dark #admin-sidebar nav a:hover,
+body.theme-dark #admin-sidebar .admin-menu-group summary:hover,
+body.theme-dark #admin-sidebar .admin-menu-group[open] summary { background: rgba(127, 29, 29, .34) !important; color: #fecdd3 !important; }
+body.theme-dark #admin-sidebar .admin-menu-group__links { border-color: #5b3440 !important; }
+body.theme-dark #admin-sidebar .admin-sidebar-footer,
+body.theme-dark #admin-sidebar .admin-sidebar-footer a { border-color: #334155 !important; }
+body.theme-dark #admin-sidebar .admin-sidebar-collapse { background: #1f2937 !important; border-color: #475569 !important; color: #f87171 !important; }
+body.theme-dark #staff-sidebar .staff-sidebar-brand,
+body.theme-dark #teacher-sidebar .teacher-sidebar-brand,
+body.theme-dark #student-sidebar .student-sidebar-brand { background: #1f2937 !important; border-color: #334155 !important; }
+body.theme-dark #staff-sidebar nav a,
+body.theme-dark #teacher-sidebar nav a,
+body.theme-dark #student-sidebar nav a { color: #cbd5e1 !important; }
+body.theme-dark #staff-sidebar nav a.bg-red-600,
+body.theme-dark #teacher-sidebar nav a.bg-red-600,
+body.theme-dark #student-sidebar nav a.bg-red-600 {
+    color: #fff !important;
+    background: linear-gradient(135deg, #ef4444, #c81e1e) !important;
+    border-color: rgba(254, 202, 202, .36) !important;
+    box-shadow: 0 8px 18px rgba(127, 29, 29, .35) !important;
+}
+
+/* The student theme defines a navy default ink after the shared theme file.
+   Set the reading colours again with the portal selector so headings and card
+   text never disappear into the dark workspace. */
+body.theme-dark #student-sidebar ~ .min-h-screen main { color: #e5e7eb !important; }
+body.theme-dark #student-sidebar ~ .min-h-screen main :is(h1, h2, h3, h4, strong) { color: #f8fafc !important; }
+body.theme-dark #student-sidebar ~ .min-h-screen main :is(.text-gray-500, .text-slate-500, .text-gray-600, .text-slate-600) { color: #cbd5e1 !important; }
+body.theme-dark #student-sidebar ~ .min-h-screen main :is(.text-gray-400, .text-slate-400) { color: #94a3b8 !important; }
+
+/* Full-screen internship request form: it has no portal navigation shell, so
+   give the working panels their own dark surfaces while leaving the A4/PDF
+   preview white for accurate document checking. */
+body.theme-dark .internship-workspace { background: #111827 !important; }
+body.theme-dark .internship-workspace > div > .internship-form-scroll,
+body.theme-dark .internship-preview-scroll > section,
+body.theme-dark .internship-form section,
+body.theme-dark .internship-form-scroll > div:first-child,
+body.theme-dark .internship-form .sticky {
+    background: #1f2937 !important;
+    border-color: #334155 !important;
+    color: #e5e7eb !important;
+}
+body.theme-dark .internship-preview-scroll > aside { background: #111827 !important; border-color: #334155 !important; }
+body.theme-dark .internship-preview-scroll > section :is(h1, h2, h3, h4) { color: #f8fafc !important; }
+body.theme-dark .internship-preview-scroll > section > div > p { color: #cbd5e1 !important; }
+body.theme-dark .internship-form-scroll :is(h1, h2, h3, strong),
+body.theme-dark .internship-form section h2 { color: #f8fafc !important; }
+body.theme-dark .internship-form :is(.field-label, label > span) { color: #cbd5e1 !important; }
+body.theme-dark .internship-form :is(input:not([type="checkbox"]):not([type="file"]), select, textarea) {
+    background: #111827 !important;
+    border-color: #475569 !important;
+    color: #f8fafc !important;
+}
+body.theme-dark .internship-form input:disabled { background: #263248 !important; color: #cbd5e1 !important; }
+
+/* Full-screen R-document form: keep controls dark, but retain the simulated
+   A4 document on the left as white because it represents printed output. */
+body.theme-dark .document-workspace { background: #111827 !important; }
+body.theme-dark > header { background: #1f2937 !important; border-color: #334155 !important; }
+body.theme-dark > header h1 { color: #f8fafc !important; }
+body.theme-dark > header a { background: #1f2937 !important; border-color: #475569 !important; color: #e2e8f0 !important; }
+body.theme-dark .document-workspace > aside,
+body.theme-dark .document-workspace > aside > div:first-child,
+body.theme-dark .document-form-scroll { background: #1f2937 !important; border-color: #334155 !important; color: #e5e7eb !important; }
+body.theme-dark .document-workspace :is(h1, h2, h3, h4, strong) { color: #f8fafc !important; }
+body.theme-dark .document-workspace :is(.text-slate-500, .text-gray-500, .text-slate-600, .text-gray-600) { color: #cbd5e1 !important; }
+body.theme-dark #document-form > .space-y-4 > div { background: #1f2937 !important; border-color: #334155 !important; }
+body.theme-dark #document-form > div { background: #1f2937 !important; border-color: #334155 !important; }
+body.theme-dark #document-form label { color: #e2e8f0 !important; }
+body.theme-dark #document-form input:not([type="hidden"]),
+body.theme-dark #document-form select,
+body.theme-dark #document-form textarea { background-color: #111827 !important; border-color: #475569 !important; color: #f8fafc !important; }
+body.theme-dark #document-form :is(.text-zinc-400, .text-slate-400, .text-slate-500, .text-gray-400, .text-gray-500) { color: #cbd5e1 !important; }
+body.theme-dark #document-form :is(.text-slate-700, .text-slate-800, .text-slate-900) { color: #f8fafc !important; }
+body.theme-dark #document-form :is(input:disabled, textarea:disabled, select:disabled) { background-color: #263248 !important; border-color: #475569 !important; color: #cbd5e1 !important; }
+
+/* Page-specific operational headers are light in the normal theme. */
+body.theme-dark .management-hero,
+body.theme-dark main section.bg-gradient-to-br.from-slate-950,
+body.theme-dark main section.bg-gradient-to-r.from-slate-950,
+body.theme-dark main section.bg-slate-950,
+body.theme-dark main .rounded-2xl > .bg-slate-950.text-white {
+    background: #1f2937 !important;
+    border-color: #334155 !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .24) !important;
+    color: #f8fafc !important;
+}
+body.theme-dark .management-hero__icon { background: rgba(220, 38, 38, .18) !important; color: #f87171 !important; }
+body.theme-dark .management-hero h1,
+body.theme-dark main section.bg-gradient-to-br.from-slate-950 :is(h1, h2, h3),
+body.theme-dark main section.bg-gradient-to-r.from-slate-950 :is(h1, h2, h3),
+body.theme-dark main section.bg-slate-950 :is(h1, h2, h3) { color: #f8fafc !important; }
+body.theme-dark .management-hero p:last-child,
+body.theme-dark main section.bg-gradient-to-br.from-slate-950 p,
+body.theme-dark main section.bg-gradient-to-r.from-slate-950 p,
+body.theme-dark main section.bg-slate-950 p { color: #cbd5e1 !important; }
+
+/* Shared controls in the top bar. */
+.role-switcher {
+    position: relative;
+    height: 2.9rem;
+    border: 1px solid #fecdd3;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #fff7f7 0%, #fff 100%);
+    box-shadow: 0 5px 14px rgba(15, 23, 42, .07);
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.role-switcher:hover { border-color: #fda4af; box-shadow: 0 8px 18px rgba(220, 38, 38, .12); transform: translateY(-1px); }
+.role-switcher[open] { border-color: #fda4af; box-shadow: 0 10px 22px rgba(220, 38, 38, .16); }
+.role-switcher__summary { display: flex; height: 100%; cursor: pointer; list-style: none; align-items: center; gap: .55rem; padding: .28rem .55rem .28rem .35rem; }
+.role-switcher__summary::-webkit-details-marker { display: none; }
+.role-switcher__icon {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: .7rem;
+    background: linear-gradient(135deg, #ef4444, #c81e1e);
+    color: #fff;
+    font-size: .76rem;
+    box-shadow: 0 3px 8px rgba(220, 38, 38, .24);
+}
+.role-switcher__current {
+    min-width: 4.3rem;
+    max-width: 7.4rem;
+    color: #991b1b !important;
+    font-size: .98rem !important;
+    font-weight: 800;
+    line-height: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.role-switcher__chevron { color: #be123c; font-size: .64rem; transition: transform .18s ease; }
+.role-switcher[open] .role-switcher__chevron { transform: rotate(180deg); }
+.role-switcher__menu { position: absolute; top: calc(100% + .55rem); right: 0; z-index: 80; min-width: 13rem; overflow: hidden; border: 1px solid #fecdd3; border-radius: 1rem; background: #fff; box-shadow: 0 16px 32px rgba(15, 23, 42, .18); padding: .45rem; }
+.role-switcher__menu-title { margin: .3rem .55rem .45rem; color: #94a3b8; font-size: .78rem; font-weight: 800; letter-spacing: .04em; }
+.role-switcher__menu form { margin: 0; }
+.role-switcher__option { display: flex; width: 100%; align-items: center; gap: .6rem; border: 0; border-radius: .7rem; background: transparent; color: #334155; cursor: pointer; font-family: inherit; font-size: .98rem; font-weight: 700; padding: .58rem .6rem; text-align: left; }
+.role-switcher__option:hover { background: #fff1f2; color: #be123c; }
+.role-switcher__option.is-active { background: #fff1f2; color: #be123c; }
+.role-switcher__option-icon { display: inline-flex; width: 1.75rem; height: 1.75rem; align-items: center; justify-content: center; border-radius: .55rem; background: #fef2f2; color: #dc2626; font-size: .72rem; }
+.theme-toggle {
+    width: 2.9rem;
+    height: 2.9rem;
+    border: 1px solid #dbe3ef;
+    border-radius: 1rem;
+    background: linear-gradient(145deg, #fff 0%, #f1f5f9 100%);
+    color: #475569;
+    box-shadow: 0 5px 14px rgba(15, 23, 42, .08), inset 0 1px 0 rgba(255, 255, 255, .9);
+    font-size: 1rem;
+    transition: transform .18s ease, box-shadow .18s ease, color .18s ease, border-color .18s ease;
+}
+.theme-toggle:hover { transform: translateY(-1px) rotate(10deg); border-color: #fbbf24; color: #d97706; box-shadow: 0 8px 17px rgba(217, 119, 6, .16); }
+body.theme-dark .role-switcher { border-color: #5b3440; background: linear-gradient(135deg, #2a2028, #1f2937); box-shadow: 0 5px 14px rgba(0, 0, 0, .24); }
+body.theme-dark .role-switcher__current,
+body.theme-dark .role-switcher__chevron { color: #fecdd3 !important; }
+body.theme-dark .role-switcher__menu { border-color: #5b3440; background: #1f2937; box-shadow: 0 16px 32px rgba(0, 0, 0, .38); }
+body.theme-dark .role-switcher__menu-title { color: #94a3b8; }
+body.theme-dark .role-switcher__option { color: #e2e8f0; }
+body.theme-dark .role-switcher__option:hover,
+body.theme-dark .role-switcher__option.is-active { background: rgba(127, 29, 29, .34); color: #fecdd3; }
+body.theme-dark .role-switcher__option-icon { background: rgba(220, 38, 38, .17); color: #f87171; }
+body.theme-dark .theme-toggle { background: linear-gradient(145deg, #263247, #172033) !important; border-color: #475569 !important; color: #facc15 !important; box-shadow: 0 5px 14px rgba(0, 0, 0, .32), inset 0 1px 0 rgba(255, 255, 255, .06); }

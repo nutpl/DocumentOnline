@@ -1,0 +1,124 @@
+.teacher-sidebar-collapse {
+    position: absolute;
+    right: -1rem;
+    top: 1.55rem;
+    z-index: 2;
+    color: #b91c1c;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 5px 14px rgba(15, 23, 42, .18);
+}
+
+.teacher-sidebar-collapse:hover {
+    color: #fff;
+    background: #dc2626;
+}
+
+/* A single icon column keeps each teacher menu label aligned. Red icons make
+   the navigation hierarchy clearer while selected menu items stay white. */
+#teacher-sidebar nav > a > i,
+#teacher-sidebar nav > a > .teacher-menu-icon {
+    flex: 0 0 2.5rem;
+    width: 2.5rem !important;
+    text-align: center;
+}
+
+#teacher-sidebar nav > a:not(.bg-red-600) > i {
+    color: #dc2626;
+    font-size: 1.05rem;
+}
+
+/* The COOP image is red by design; make it white on the red active item so
+   the symbol remains visible just like the other selected menu icons. */
+#teacher-sidebar nav > a.bg-red-600 .teacher-menu-icon img {
+    filter: brightness(0) invert(1);
+    opacity: .98;
+}
+
+#teacher-sidebar .teacher-coop-active {
+    filter: brightness(0) invert(1) !important;
+    opacity: 1;
+}
+
+@media (min-width: 1024px) {
+    /* Keep the top bar visible while only the page content scrolls. */
+    body {
+        height: 100dvh;
+        overflow: hidden;
+    }
+
+    #teacher-sidebar ~ .min-h-screen {
+        display: flex;
+        height: 100dvh;
+        min-height: 0;
+        flex-direction: column;
+    }
+
+    #teacher-sidebar ~ .min-h-screen > header {
+        position: relative;
+        z-index: 10;
+        flex: 0 0 auto;
+    }
+
+    #teacher-sidebar ~ .min-h-screen > main {
+        min-height: 0;
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    #teacher-sidebar,
+    #teacher-sidebar ~ div {
+        transition: width .22s ease, margin-left .22s ease;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed {
+        width: 5.5rem !important;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed ~ div {
+        margin-left: 5.5rem !important;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed .teacher-sidebar-brand {
+        justify-content: center;
+        padding-inline: .75rem !important;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed .teacher-sidebar-label,
+    #teacher-sidebar.teacher-sidebar-collapsed .teacher-faculty-logo,
+    #teacher-sidebar.teacher-sidebar-collapsed nav > p,
+    #teacher-sidebar.teacher-sidebar-collapsed nav a > span:not(.teacher-menu-icon),
+    #teacher-sidebar.teacher-sidebar-collapsed .teacher-menu-count,
+    #teacher-sidebar.teacher-sidebar-collapsed .teacher-sidebar-footer a > span {
+        display: none !important;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed nav {
+        padding-inline: .75rem !important;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed nav a {
+        justify-content: center;
+        min-height: 3rem;
+        padding-inline: 0 !important;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed nav a i {
+        width: auto !important;
+        font-size: 1.08rem;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed .teacher-menu-icon {
+        width: 2.5rem !important;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed .teacher-sidebar-footer {
+        padding-inline: .75rem !important;
+    }
+
+    #teacher-sidebar.teacher-sidebar-collapsed .teacher-sidebar-footer a {
+        min-height: 3rem;
+        padding: 0 !important;
+    }
+}

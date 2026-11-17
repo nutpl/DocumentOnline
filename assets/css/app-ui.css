@@ -1,0 +1,291 @@
+/* Shared product UI layer — loaded by Admin, Student, Staff, and Teacher shells. */
+@font-face {
+    font-family: "TH Sarabun PSK";
+    src: url("../fonts/thsarabunpsk/THSarabun.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TH Sarabun PSK";
+    src: url("../fonts/thsarabunpsk/THSarabun-Bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TH Sarabun PSK";
+    src: url("../fonts/thsarabunpsk/THSarabun-Italic.ttf") format("truetype");
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TH Sarabun PSK";
+    src: url("../fonts/thsarabunpsk/THSarabun-BoldItalic.ttf") format("truetype");
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+}
+
+:root {
+    --app-ink: #0f172a;
+    --app-muted: #64748b;
+    --app-line: #e2e8f0;
+    --app-surface: #ffffff;
+    --app-background: #f6f8fb;
+    --app-primary: #dc2626;
+    --app-primary-dark: #b91c1c;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* TH Sarabun PSK มีสัดส่วนตัวอักษรเล็กกว่าฟอนต์ UI ทั่วไป จึงเพิ่มฐานเล็กน้อยโดยไม่ทำให้เลย์เอาต์ขยายเกินสัดส่วน */
+    font-size: 17px;
+}
+body {
+    color: var(--app-ink);
+    font-family: "TH Sarabun PSK", Tahoma, "Noto Sans Thai", "Segoe UI", sans-serif;
+    font-size: 22px;
+    line-height: 1.35;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* TH Sarabun PSK has a compact x-height. Keep utility text readable without changing card/sidebar dimensions. */
+.text-xs { font-size: 18px !important; }
+.text-sm { font-size: 20px !important; }
+.text-base { font-size: 22px !important; }
+.text-lg { font-size: 24px !important; }
+.text-xl { font-size: 27px !important; }
+.text-2xl { font-size: 31px !important; }
+.text-3xl { font-size: 36px !important; }
+.text-4xl { font-size: 42px !important; }
+
+@media (max-width: 639px) {
+    body { font-size: 21px; }
+    .text-xs { font-size: 17px !important; }
+    .text-sm { font-size: 19px !important; }
+    .text-base { font-size: 21px !important; }
+    .text-lg { font-size: 23px !important; }
+    .text-xl { font-size: 25px !important; }
+    .text-2xl { font-size: 29px !important; }
+    .text-3xl { font-size: 34px !important; }
+}
+
+::selection { background: #fee2e2; color: #991b1b; }
+a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button, a { transition: color .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+    border-color: #cbd5e1 !important;
+    background-color: #fff;
+    color: var(--app-ink);
+}
+
+/* Keep form text legible on white surfaces across desktop and mobile. */
+input:not([type="checkbox"]):not([type="radio"])::placeholder,
+textarea::placeholder {
+    color: #64748b;
+    opacity: 1;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+    color: #475569 !important;
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    opacity: 1;
+}
+
+option {
+    color: #0f172a;
+    background: #fff;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):hover,
+select:hover,
+textarea:hover { border-color: #94a3b8 !important; }
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:focus {
+    border-color: #ef4444 !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, .13) !important;
+}
+
+:focus-visible {
+    outline: 3px solid rgba(59, 130, 246, .35) !important;
+    outline-offset: 2px;
+}
+
+button:disabled,
+[aria-disabled="true"] { cursor: not-allowed; opacity: .58; }
+
+/* Keep action labels and SweetAlert messages as legible as the rest of the TH Sarabun PSK interface. */
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.swal2-popup {
+    font-family: "TH Sarabun PSK", Tahoma, "Noto Sans Thai", sans-serif !important;
+    font-size: 22px !important;
+}
+
+.swal2-title { font-size: 34px !important; line-height: 1.2 !important; }
+.swal2-html-container { font-size: 22px !important; line-height: 1.35 !important; }
+.swal2-actions .swal2-styled { font-size: 21px !important; font-family: inherit !important; }
+
+@media (max-width: 639px) {
+    .swal2-popup { font-size: 21px !important; }
+    .swal2-title { font-size: 30px !important; }
+    .swal2-html-container { font-size: 21px !important; }
+    .swal2-actions .swal2-styled { font-size: 20px !important; }
+}
+
+/* A calmer application canvas for operational pages. */
+#admin-sidebar ~ .min-h-screen,
+#staff-sidebar ~ .min-h-screen,
+#teacher-sidebar ~ .min-h-screen { background: var(--app-background); }
+
+/* Consistent navigation for operational roles. */
+#staff-sidebar,
+#teacher-sidebar {
+    border-color: #e2e8f0 !important;
+    box-shadow: 10px 0 28px rgba(15, 23, 42, .06);
+}
+
+#staff-sidebar .staff-sidebar-brand,
+#teacher-sidebar .teacher-sidebar-brand { background: #fff; }
+
+#staff-sidebar nav a,
+#teacher-sidebar nav a {
+    border: 1px solid transparent;
+    border-radius: .8rem !important;
+    color: #475569 !important;
+    font-weight: 650;
+}
+
+#staff-sidebar nav a:hover,
+#teacher-sidebar nav a:hover {
+    background: #fff1f2 !important;
+    color: #be123c !important;
+}
+
+#staff-sidebar nav a.bg-red-600,
+#teacher-sidebar nav a.bg-red-600 {
+    background: linear-gradient(135deg, #ef4444, #c81e1e) !important;
+    color: #fff !important;
+    box-shadow: 0 8px 16px rgba(220, 38, 38, .18);
+}
+
+/* Reusable panels and tables without changing document-preview canvases. */
+main .table-card,
+main .card,
+main .document-card {
+    border: 1px solid var(--app-line);
+    border-radius: 1rem;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, .045);
+}
+
+main .table-card > :first-child,
+main .card > :first-child { border-top-left-radius: inherit; border-top-right-radius: inherit; }
+main table thead { background: #f8fafc !important; color: #334155; }
+/* Keep labels in every data-table header consistent; body-cell alignment stays page-specific. */
+main table thead th { text-align: center !important; }
+main table tbody tr { border-color: #edf1f5 !important; }
+main table tbody tr:hover { background: #fafcff !important; }
+
+/* Light, compact page headers for administration screens. */
+.management-hero {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #fff 0%, #fff7f7 100%);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, .06);
+    padding: 1.4rem 1.5rem 1.4rem 1.75rem;
+}
+.management-hero::before { position: absolute; inset: 1rem auto 1rem 0; width: .28rem; border-radius: 0 .5rem .5rem 0; background: var(--app-primary); content: ''; }
+.management-hero__icon { display: inline-flex; height: 2.8rem; width: 2.8rem; flex: 0 0 auto; align-items: center; justify-content: center; border-radius: .85rem; background: #fff0f1; color: #dc2626; font-size: 1.15rem; }
+.management-hero__eyebrow { margin: 0 0 .2rem; color: #dc2626; font-size: .9rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+.management-hero h1 { margin: 0; color: var(--app-ink); font-size: clamp(1.45rem, 2.4vw, 1.9rem); font-weight: 850; letter-spacing: -.025em; }
+.management-hero p:last-child { margin: .35rem 0 0; color: var(--app-muted); font-size: 1.08rem; line-height: 1.55; }
+
+/* Replace the old dark navy / wine promotional headers with the product's light operational header. */
+main section.bg-gradient-to-br.from-slate-950,
+main section.bg-gradient-to-r.from-slate-950,
+main section.bg-slate-950,
+main .rounded-2xl > .bg-slate-950.text-white {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 1rem !important;
+    background: linear-gradient(135deg, #ffffff 0%, #fff7f7 100%) !important;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, .06) !important;
+    color: var(--app-ink) !important;
+}
+
+main section.bg-gradient-to-br.from-slate-950::before,
+main section.bg-gradient-to-r.from-slate-950::before,
+main section.bg-slate-950::before,
+main .rounded-2xl > .bg-slate-950.text-white::before {
+    position: absolute;
+    inset: 1rem auto 1rem 0;
+    width: .28rem;
+    border-radius: 0 .5rem .5rem 0;
+    background: var(--app-primary);
+    content: '';
+}
+
+main section.bg-gradient-to-br.from-slate-950 :is(h1, h2, h3),
+main section.bg-gradient-to-r.from-slate-950 :is(h1, h2, h3),
+main section.bg-slate-950 :is(h1, h2, h3),
+main .rounded-2xl > .bg-slate-950.text-white :is(h1, h2, h3) { color: var(--app-ink) !important; }
+
+main section.bg-gradient-to-br.from-slate-950 p,
+main section.bg-gradient-to-r.from-slate-950 p,
+main section.bg-slate-950 p,
+main .rounded-2xl > .bg-slate-950.text-white p { color: var(--app-muted) !important; }
+
+main section.bg-gradient-to-br.from-slate-950 .text-red-300,
+main section.bg-gradient-to-r.from-slate-950 .text-red-300,
+main section.bg-slate-950 .text-red-300,
+main .rounded-2xl > .bg-slate-950.text-white .text-red-300 { color: var(--app-primary) !important; }
+
+main section.bg-gradient-to-br.from-slate-950 .absolute,
+main section.bg-gradient-to-r.from-slate-950 .absolute,
+main .rounded-2xl > .bg-slate-950.text-white .absolute { display: none; }
+
+/* Profile cards use the shared light header.  Keep the role and identifier
+   readable after the dark-header styles above are converted to a light card. */
+main .profile-hero .profile-role {
+    background: #dc2626 !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(185, 28, 28, .2);
+}
+main .profile-hero .profile-student-number {
+    color: #475569 !important;
+    font-weight: 600;
+}
+main .profile-hero .profile-student-number i { color: #dc2626 !important; }
+
+@media (max-width: 639px) {
+    main { padding: 1rem !important; }
+    main .table-card,
+    main .card { border-radius: .9rem; }
+    input:not([type="checkbox"]):not([type="radio"]), select, textarea { min-height: 2.75rem; }
+}

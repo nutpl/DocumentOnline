@@ -1,0 +1,2 @@
+<?php
+$zip=new ZipArchive();$zip->open($argv[1]);$xml=$zip->getFromName('word/document.xml');$zip->close();$dom=new DOMDocument();$dom->loadXML($xml);$xp=new DOMXPath($dom);$xp->registerNamespace('w','http://schemas.openxmlformats.org/wordprocessingml/2006/main');foreach($xp->query('//w:p') as $i=>$p){$text='';foreach($xp->query('.//w:t',$p) as $t)$text.=$t->textContent;if(str_contains($text,'มิถุนายน')){echo "$i: ".json_encode($text,JSON_UNESCAPED_UNICODE)."\n";echo $dom->saveXML($p)."\n";}}

@@ -1,0 +1,52 @@
+// ER Diagram กลุ่ม 01_organization
+// วางทั้งหมดใน dbdiagram.io ได้โดยตรง
+
+Table faculty {
+  faculty_id int [pk]
+  faculty_abbreviation varchar
+  faculty_name varchar
+}
+
+Table department {
+  department_id int [pk]
+  faculty_id int
+  department_abbreviation varchar
+  department_name varchar
+}
+
+Table group_class {
+  group_id int [pk]
+  department_id int
+  group_name varchar
+  advisor_employee_id int
+}
+
+Table employee {
+  employee_id int [pk]
+  user_id int
+  employee_code varchar
+  prefix_id int
+  firstname varchar
+  lastname varchar
+  phone varchar
+  department_id int
+  employee_type enum
+  created_at timestamp
+}
+
+Table student {
+  student_id int [pk]
+  user_id int
+  student_number varchar
+  prefix_id int
+  firstname varchar
+  lastname varchar
+  group_id int
+}
+
+// Foreign-key relationships within this group
+Ref: department.faculty_id > faculty.faculty_id
+Ref: employee.department_id > department.department_id
+Ref: group_class.advisor_employee_id > employee.employee_id
+Ref: group_class.department_id > department.department_id
+Ref: student.group_id > group_class.group_id

@@ -1,0 +1,4 @@
+services:
+  web:
+    volumes:
+      - ./Project/assets/fonts/thsarabunpsk:/usr/local/share/fonts/truetype/thsarabunpsk:ro

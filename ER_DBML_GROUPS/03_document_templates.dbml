@@ -1,0 +1,73 @@
+// ER Diagram กลุ่ม 03_document_templates
+// วางทั้งหมดใน dbdiagram.io ได้โดยตรง
+
+Table users {
+  user_id int [pk]
+  username varchar
+  email varchar
+  password varchar
+  first_login tinyint
+  status enum
+  active_session_token_hash char
+  active_session_at datetime
+  created_at timestamp
+}
+
+Table document_type {
+  document_type_id int [pk]
+  document_code varchar
+  document_name varchar
+  form_file varchar
+  description text
+  status enum
+}
+
+Table document_template {
+  template_id int [pk]
+  document_type_id int
+  template_name varchar
+  pdf_template varchar
+  docx_template varchar
+  original_file varchar
+  preview_image varchar
+  total_pages int
+  file_type varchar
+  status enum
+  imported_by int
+  imported_at timestamp
+}
+
+Table template_fields {
+  field_id int [pk]
+  template_id int
+  field_name varchar
+  field_label varchar
+  field_type enum
+  page_no int
+  pos_x decimal
+  pos_y decimal
+  width decimal
+  height decimal
+  font_size decimal
+  required_field tinyint
+  default_value text
+}
+
+Table review_workflows {
+  workflow_id int [pk]
+  document_type_id int
+  workflow_name varchar
+  version_no int
+  workflow_status enum
+  revision_return_policy enum
+  created_by int
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Foreign-key relationships within this group
+Ref: document_template.document_type_id > document_type.document_type_id
+Ref: document_template.imported_by > users.user_id
+Ref: review_workflows.created_by > users.user_id
+Ref: review_workflows.document_type_id > document_type.document_type_id
+Ref: template_fields.template_id > document_template.template_id

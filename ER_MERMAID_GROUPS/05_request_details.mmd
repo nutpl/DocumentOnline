@@ -1,0 +1,101 @@
+erDiagram
+    documents {
+        int document_id PK
+        int student_id FK
+        int template_id FK
+        enum document_status
+        timestamp created_at
+        timestamp updated_at
+        datetime submitted_at
+    }
+    employee {
+        int employee_id PK
+        int user_id FK
+        varchar employee_code
+        int prefix_id FK
+        varchar firstname
+        varchar lastname
+        varchar phone
+        int department_id FK
+        enum employee_type
+        timestamp created_at
+    }
+    r01_request {
+        int r01_id PK
+        int document_id FK
+        int advisor_employee_id FK
+        varchar subject
+        varchar recipient
+        text request_detail
+        varchar phone
+        timestamp created_at
+    }
+    r12_request {
+        int r12_id PK
+        int document_id FK
+        int advisor_employee_id FK
+        varchar course_code
+        varchar course_name
+        varchar old_group
+        varchar new_group
+        text reason
+        timestamp created_at
+    }
+    r12_request_courses {
+        int r12_course_id PK
+        int r12_id FK
+        tinyint item_no
+        varchar semester
+        varchar course_code
+        varchar course_name
+        varchar section
+        varchar old_group
+        varchar new_group
+    }
+    r14_request {
+        int r14_id PK
+        int document_id FK
+        varchar semester
+        varchar academic_year
+        enum request_type
+        decimal enrolled_credits
+        decimal cumulative_gpa
+        timestamp created_at
+        timestamp updated_at
+    }
+    r18_request {
+        int r18_id PK
+        int document_id FK
+        varchar course_code
+        varchar course_name
+        decimal credits
+        varchar semester
+        varchar academic_year
+        int teacher_employee_id FK
+        text reason
+        timestamp created_at
+    }
+    r24_request {
+        int r24_id PK
+        int document_id FK
+        varchar leave_type
+        date start_date
+        date end_date
+        text reason
+        varchar course_code
+        varchar course_name
+        int teacher_employee_id FK
+        timestamp created_at
+    }
+
+    documents ||--o| r01_request : "รายละเอียด R01"
+    employee o|--o{ r01_request : "อาจารย์ที่ปรึกษา"
+    documents ||--o| r12_request : "รายละเอียด R12"
+    employee o|--o{ r12_request : "อาจารย์ที่ปรึกษา"
+    r12_request ||--o{ r12_request_courses : "มีรายวิชา"
+    documents ||--o| r14_request : "รายละเอียด R14"
+    documents ||--o| r18_request : "รายละเอียด R18"
+    employee o|--o{ r18_request : "อาจารย์ผู้สอน"
+    documents ||--o| r24_request : "รายละเอียด R24"
+    employee o|--o{ r24_request : "อาจารย์ผู้สอน"
+

@@ -1,0 +1,138 @@
+erDiagram
+    users {
+        int user_id PK
+        varchar username
+        varchar email
+        varchar password
+        tinyint first_login
+        enum status
+        char active_session_token_hash
+        datetime active_session_at
+        timestamp created_at
+    }
+    student {
+        int student_id PK
+        int user_id FK
+        varchar student_number
+        int prefix_id FK
+        varchar firstname
+        varchar lastname
+        int group_id FK
+    }
+    documents {
+        int document_id PK
+        int student_id FK
+        int template_id FK
+        enum document_status
+        timestamp created_at
+        timestamp updated_at
+        datetime submitted_at
+    }
+    internship_calendar {
+        int calendar_id PK
+        smallint academic_year
+        tinyint semester
+        date start_date
+        date end_date
+        enum status
+        int created_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+    internship_profile {
+        int internship_profile_id PK
+        int student_id FK
+        enum request_status
+        enum request_reason
+        int previous_profile_id FK
+        varchar closed_reason
+        datetime closed_at
+        int calendar_id FK
+        varchar student_phone
+        tinyint year_level
+        varchar recipient_name
+        varchar company_name
+        text company_address
+        varchar subdistrict
+        varchar district
+        varchar province
+        varchar postal_code
+        varchar company_phone
+        varchar company_fax
+        varchar contact_prefix
+        varchar contact_name
+        varchar contact_position
+        varchar contact_phone
+        varchar job_position
+        text job_description
+        varchar capacity_note
+        varchar recipient_position
+        varchar recipient_department
+        varchar company_number
+        varchar company_moo
+        varchar company_building
+        varchar company_floor
+        varchar company_road
+        varchar company_alley
+        varchar company_email
+        varchar contact_department
+        varchar contact_email
+        tinyint qualification_department
+        tinyint qualification_preparation
+        tinyint qualification_gpa
+        tinyint qualification_company
+        timestamp updated_at
+        timestamp created_at
+    }
+    internship_application {
+        int internship_application_id PK
+        int internship_profile_id FK
+        int document_id FK
+        date request_date
+        enum contact_status
+        enum delivery_method
+        enum status
+        varchar signed_file
+        datetime submitted_at
+        timestamp created_at
+        timestamp updated_at
+    }
+    internship_response_document {
+        int response_document_id PK
+        int internship_profile_id FK
+        varchar original_filename
+        varchar stored_filename
+        enum review_status
+        text review_note
+        int reviewed_by FK
+        datetime uploaded_at
+        datetime reviewed_at
+        timestamp updated_at
+    }
+    internship_response_declaration {
+        bigint response_declaration_id PK
+        int internship_profile_id FK
+        enum reported_result
+        enum evidence_state
+        text student_note
+        int declared_by FK
+        datetime declared_at
+        timestamp updated_at
+    }
+    internship_response_no_document_review {
+
+    }
+
+    users o|--o{ internship_calendar : "สร้างปฏิทิน"
+    student ||--o{ internship_profile : "มีประวัติฝึก"
+    internship_calendar o|--o{ internship_profile : "กำหนดช่วงฝึก"
+    internship_profile o|--o{ internship_profile : "ต่อจากคำร้องเดิม"
+    internship_profile ||--o| internship_application : "มีใบสมัคร"
+    documents o|--o| internship_application : "เอกสารใบสมัคร"
+    internship_profile ||--o{ internship_response_document : "มีใบตอบรับ"
+    users o|--o{ internship_response_document : "ผู้ตรวจใบตอบรับ"
+    internship_profile ||--o| internship_response_declaration : "แจ้งผลแทนเอกสาร"
+    users ||--o{ internship_response_declaration : "ผู้แจ้ง"
+    internship_profile ||--o| internship_response_no_document_review : "ตรวจกรณีไม่มีใบตอบรับ"
+    users ||--o{ internship_response_no_document_review : "ผู้ตรวจ"
+

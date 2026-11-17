@@ -1,0 +1,110 @@
+// ER Diagram กลุ่ม 05_request_details
+// วางทั้งหมดใน dbdiagram.io ได้โดยตรง
+
+Table documents {
+  document_id int [pk]
+  student_id int
+  template_id int
+  document_status enum
+  created_at timestamp
+  updated_at timestamp
+  submitted_at datetime
+}
+
+Table employee {
+  employee_id int [pk]
+  user_id int
+  employee_code varchar
+  prefix_id int
+  firstname varchar
+  lastname varchar
+  phone varchar
+  department_id int
+  employee_type enum
+  created_at timestamp
+}
+
+Table r01_request {
+  r01_id int [pk]
+  document_id int
+  advisor_employee_id int
+  subject varchar
+  recipient varchar
+  request_detail text
+  phone varchar
+  created_at timestamp
+}
+
+Table r12_request {
+  r12_id int [pk]
+  document_id int
+  advisor_employee_id int
+  course_code varchar
+  course_name varchar
+  old_group varchar
+  new_group varchar
+  reason text
+  created_at timestamp
+}
+
+Table r12_request_courses {
+  r12_course_id int [pk]
+  r12_id int
+  item_no tinyint
+  semester varchar
+  course_code varchar
+  course_name varchar
+  section varchar
+  old_group varchar
+  new_group varchar
+}
+
+Table r14_request {
+  r14_id int [pk]
+  document_id int
+  semester varchar
+  academic_year varchar
+  request_type enum
+  enrolled_credits decimal
+  cumulative_gpa decimal
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table r18_request {
+  r18_id int [pk]
+  document_id int
+  course_code varchar
+  course_name varchar
+  credits decimal
+  semester varchar
+  academic_year varchar
+  teacher_employee_id int
+  reason text
+  created_at timestamp
+}
+
+Table r24_request {
+  r24_id int [pk]
+  document_id int
+  leave_type varchar
+  start_date date
+  end_date date
+  reason text
+  course_code varchar
+  course_name varchar
+  teacher_employee_id int
+  created_at timestamp
+}
+
+// Foreign-key relationships within this group
+Ref: r01_request.advisor_employee_id > employee.employee_id
+Ref: r01_request.document_id > documents.document_id
+Ref: r12_request.advisor_employee_id > employee.employee_id
+Ref: r12_request_courses.r12_id > r12_request.r12_id
+Ref: r12_request.document_id > documents.document_id
+Ref: r14_request.document_id > documents.document_id
+Ref: r18_request.document_id > documents.document_id
+Ref: r18_request.teacher_employee_id > employee.employee_id
+Ref: r24_request.document_id > documents.document_id
+Ref: r24_request.teacher_employee_id > employee.employee_id

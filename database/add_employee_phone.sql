@@ -1,0 +1,3 @@
+ALTER TABLE employee
+    ADD COLUMN IF NOT EXISTS phone VARCHAR(30) NULL AFTER email;
+

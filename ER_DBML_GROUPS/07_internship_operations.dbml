@@ -1,0 +1,175 @@
+// ER Diagram กลุ่ม 07_internship_operations
+// วางทั้งหมดใน dbdiagram.io ได้โดยตรง
+
+Table users {
+  user_id int [pk]
+  username varchar
+  email varchar
+  password varchar
+  first_login tinyint
+  status enum
+  active_session_token_hash char
+  active_session_at datetime
+  created_at timestamp
+}
+
+Table employee {
+  employee_id int [pk]
+  user_id int
+  employee_code varchar
+  prefix_id int
+  firstname varchar
+  lastname varchar
+  phone varchar
+  department_id int
+  employee_type enum
+  created_at timestamp
+}
+
+Table department {
+  department_id int [pk]
+  faculty_id int
+  department_abbreviation varchar
+  department_name varchar
+}
+
+Table internship_profile {
+  internship_profile_id int [pk]
+  student_id int
+  request_status enum
+  request_reason enum
+  previous_profile_id int
+  closed_reason varchar
+  closed_at datetime
+  calendar_id int
+  student_phone varchar
+  year_level tinyint
+  recipient_name varchar
+  company_name varchar
+  company_address text
+  subdistrict varchar
+  district varchar
+  province varchar
+  postal_code varchar
+  company_phone varchar
+  company_fax varchar
+  contact_prefix varchar
+  contact_name varchar
+  contact_position varchar
+  contact_phone varchar
+  job_position varchar
+  job_description text
+  capacity_note varchar
+  recipient_position varchar
+  recipient_department varchar
+  company_number varchar
+  company_moo varchar
+  company_building varchar
+  company_floor varchar
+  company_road varchar
+  company_alley varchar
+  company_email varchar
+  contact_department varchar
+  contact_email varchar
+  qualification_department tinyint
+  qualification_preparation tinyint
+  qualification_gpa tinyint
+  qualification_company tinyint
+  updated_at timestamp
+  created_at timestamp
+}
+
+Table internship_tracking {
+  internship_tracking_id int [pk]
+  internship_profile_id int
+  request_letter_status enum
+  response_status enum
+  application_status enum
+  send_letter_status enum
+  employment_status enum
+  notes text
+  updated_by int
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table internship_supervision {
+  internship_supervision_id int [pk]
+  internship_profile_id int
+  supervisor_employee_id int
+  visit1_date date
+  visit1_time time
+  visit1_mode enum
+  visit2_date date
+  visit2_time time
+  visit2_mode enum
+  supervisor_names text
+  updated_by int
+  lock_version int
+  updated_at timestamp
+}
+
+Table internship_direct_send_import {
+}
+
+Table internship_official_document {
+  official_document_id int [pk]
+  document_type enum
+  company_name varchar
+  document_number varchar
+  document_date date
+  recipient_name varchar
+  reference_text varchar
+  response_due_date date
+  signatory_name varchar
+  signatory_title_line1 varchar
+  signatory_title_line2 varchar
+  created_by int
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table internship_official_student {
+  official_document_id int
+  internship_profile_id int
+  sequence_no smallint
+
+  indexes {
+    (official_document_id, internship_profile_id) [pk]
+  }
+}
+
+Table internship_excel_sync {
+  sync_id int [pk]
+  department_id int
+  connected_by_user_id int
+  refresh_token_encrypted text
+  access_token_encrypted text
+  access_token_expires_at datetime
+  drive_id varchar
+  item_id varchar
+  workbook_name varchar
+  worksheet_name varchar
+  share_url text
+  last_synced_at datetime
+  last_sync_status varchar
+  last_sync_message text
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Foreign-key relationships within this group
+Ref: employee.department_id > department.department_id
+Ref: employee.user_id > users.user_id
+Ref: internship_direct_send_import.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_excel_sync.connected_by_user_id > users.user_id
+Ref: internship_excel_sync.department_id > department.department_id
+Ref: internship_official_document.created_by > users.user_id
+Ref: internship_official_student.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_official_student.official_document_id > internship_official_document.official_document_id
+Ref: internship_profile.previous_profile_id > internship_profile.internship_profile_id
+Ref: internship_supervision.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_supervision.supervisor_employee_id > employee.employee_id
+Ref: internship_supervision.updated_by > users.user_id
+Ref: internship_tracking.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_tracking.updated_by > users.user_id

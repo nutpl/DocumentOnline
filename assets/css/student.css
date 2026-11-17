@@ -1,0 +1,270 @@
+:root {
+    --student-navy: #0f2747;
+    --student-blue: #175b92;
+    --student-sky: #e8f4fb;
+    --student-ink: #18324d;
+}
+
+body {
+    background:
+        radial-gradient(circle at 92% 8%, rgba(125, 211, 252, .18), transparent 25rem),
+        #f4f8fb !important;
+    color: var(--student-ink) !important;
+}
+
+#student-sidebar {
+    border-right: 0 !important;
+    background: linear-gradient(180deg, #102c4f 0%, #0c223e 100%) !important;
+    box-shadow: 12px 0 35px rgba(15, 39, 71, .14);
+}
+
+.student-sidebar-collapse {
+    position: absolute;
+    right: -1rem;
+    top: 2.15rem;
+    z-index: 2;
+    color: #174e78;
+    background: #fff;
+    border: 1px solid #d7e9f4;
+    box-shadow: 0 5px 14px rgba(11, 40, 68, .2);
+}
+
+.student-sidebar-collapse:hover {
+    color: #fff;
+    background: #2087b8;
+}
+
+#student-sidebar > div:first-of-type {
+    height: 6.25rem !important;
+    border-color: rgba(255, 255, 255, .1) !important;
+}
+
+#student-sidebar > div:first-of-type img {
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+#student-sidebar h2,
+#student-sidebar .student-portal-label {
+    color: #fff !important;
+}
+
+#student-sidebar .student-portal-badge {
+    color: #8ed8ff;
+    font-size: .95rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    line-height: 1;
+}
+
+#student-sidebar nav > p {
+    color: #86a6c5 !important;
+}
+
+#student-sidebar nav a {
+    color: #c5d6e8 !important;
+    border: 1px solid transparent;
+    border-radius: 14px !important;
+}
+
+#student-sidebar nav a:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, .08) !important;
+}
+
+#student-sidebar nav a.bg-red-600 {
+    color: #12304f !important;
+    background: linear-gradient(135deg, #fff, #dff3ff) !important;
+    border-color: rgba(255, 255, 255, .55);
+    box-shadow: 0 9px 24px rgba(0, 0, 0, .18);
+}
+
+#student-sidebar > div:last-of-type {
+    border-color: rgba(255, 255, 255, .1) !important;
+}
+
+.student-account-toggle {
+    color: #eff8ff;
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(255,255,255,.055);
+    transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.student-account-toggle:hover,
+.student-account-toggle[aria-expanded="true"] {
+    border-color: rgba(142,216,255,.48);
+    background: rgba(255,255,255,.1);
+}
+
+.student-account-avatar { background: #dff3ff; color: #12304f; }
+.student-account-name { color: #f8fbff; font-size: .9rem; line-height: 1.25; }
+.student-account-email { color: #9ab6d0; font-size: .7rem; font-weight: 700; text-transform: uppercase; }
+.student-account-chevron { color: #9ab6d0; transition: transform .2s ease; }
+.student-account-toggle[aria-expanded="true"] .student-account-chevron { transform: rotate(180deg); }
+.student-account-menu { color: #1e293b; }
+.student-account-menu .student-account-avatar { background: #f1f5f9; color: #334155; }
+.student-account-logout { transition: background .2s ease, color .2s ease; }
+.student-account-logout:hover { background: #fff1f2; color: #dc2626; }
+
+@media (min-width: 1024px) {
+    .student-account-menu {
+        bottom: 0 !important;
+        left: calc(100% + .75rem) !important;
+        width: 18rem !important;
+    }
+}
+
+.student-navbar {
+    height: 5.25rem !important;
+    border: 0 !important;
+    background: rgba(255, 255, 255, .9) !important;
+    box-shadow: 0 8px 30px rgba(31, 66, 99, .08) !important;
+    backdrop-filter: blur(16px);
+}
+
+.student-navbar .student-area-label {
+    color: var(--student-blue) !important;
+    font-weight: 700;
+}
+
+.student-navbar .student-profile-image {
+    border-color: #38a3d8 !important;
+    box-shadow: 0 0 0 4px #e4f5fd;
+}
+
+.student-page-content {
+    width: min(100%, 1500px);
+    margin-inline: auto;
+}
+
+#student-sidebar ~ div main {
+    width: min(100%, 1500px);
+    margin-inline: auto;
+}
+
+.student-welcome {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid #cbe7f5;
+    border-radius: 24px !important;
+    color: #fff !important;
+    background: linear-gradient(130deg, #165985 0%, #1686a7 62%, #5ec2c2 100%) !important;
+    box-shadow: 0 20px 45px rgba(21, 102, 140, .2) !important;
+}
+
+.student-welcome::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: -80px;
+    top: -150px;
+    width: 390px;
+    height: 390px;
+    border: 55px solid rgba(255, 255, 255, .1);
+    border-radius: 50%;
+}
+
+.student-welcome .text-red-400 { color: #c9f4ff !important; }
+.student-welcome .text-gray-300 { color: #e7f8ff !important; }
+
+main section.rounded-lg.bg-white,
+main section.rounded-xl.bg-white,
+main section.rounded-2xl.bg-white,
+main .document-card {
+    border-color: #dce9f1 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 8px 24px rgba(31, 66, 99, .06) !important;
+}
+
+.student-print-button {
+    width: 2.5rem;
+    min-width: 2.5rem;
+    padding-inline: 0 !important;
+    justify-content: center;
+    border-radius: 12px !important;
+    background: #1479a8 !important;
+    box-shadow: 0 6px 14px rgba(20, 121, 168, .2);
+}
+
+.student-print-button:hover { background: #0f648d !important; }
+
+@media (max-width: 1023px) {
+    #student-sidebar { box-shadow: 18px 0 45px rgba(15, 39, 71, .28); }
+}
+
+@media (min-width: 1024px) {
+    /* Keep the navigation visible while the main content scrolls independently. */
+    body { height: 100dvh; overflow: hidden; }
+
+    #student-sidebar ~ .min-h-screen {
+        display: flex;
+        height: 100dvh;
+        min-height: 0;
+        flex-direction: column;
+    }
+
+    #student-sidebar ~ .min-h-screen > header { position: relative; z-index: 10; flex: 0 0 auto; }
+    #student-sidebar ~ .min-h-screen > main { min-height: 0; flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain; }
+
+    #student-sidebar,
+    #student-sidebar ~ div {
+        transition: width .22s ease, margin-left .22s ease;
+    }
+
+    #student-sidebar.student-sidebar-collapsed {
+        width: 5.5rem !important;
+    }
+
+    #student-sidebar.student-sidebar-collapsed ~ div {
+        margin-left: 5.5rem !important;
+    }
+
+    #student-sidebar.student-sidebar-collapsed .student-sidebar-brand {
+        justify-content: center;
+        padding-inline: .75rem !important;
+    }
+
+    #student-sidebar.student-sidebar-collapsed .student-sidebar-label,
+    #student-sidebar.student-sidebar-collapsed .student-faculty-logo,
+    #student-sidebar.student-sidebar-collapsed nav > p,
+    #student-sidebar.student-sidebar-collapsed nav a > span,
+    #student-sidebar.student-sidebar-collapsed .student-menu-count,
+    #student-sidebar.student-sidebar-collapsed .student-account-summary,
+    #student-sidebar.student-sidebar-collapsed .student-account-chevron {
+        display: none !important;
+    }
+
+    #student-sidebar.student-sidebar-collapsed nav {
+        padding-inline: .75rem !important;
+    }
+
+    #student-sidebar.student-sidebar-collapsed nav a {
+        justify-content: center;
+        padding-inline: 0 !important;
+        min-height: 3rem;
+    }
+
+    #student-sidebar.student-sidebar-collapsed nav a i {
+        width: auto !important;
+        font-size: 1.1rem;
+    }
+
+    #student-sidebar.student-sidebar-collapsed .student-sidebar-footer {
+        padding-inline: .75rem !important;
+    }
+
+    #student-sidebar.student-sidebar-collapsed .student-account-toggle {
+        justify-content: center;
+        min-height: 3rem;
+        padding: 0 !important;
+    }
+
+    #student-sidebar.student-sidebar-collapsed .student-account-menu {
+        bottom: 0;
+        left: calc(100% + .75rem);
+        width: 18rem;
+    }
+}

@@ -1,0 +1,76 @@
+/* Public account screens sit above the real landing page, keeping the entry
+   journey visually connected to the Project home screen. */
+body.auth-index-modal {
+    position: relative;
+    isolation: isolate;
+    min-height: 100svh;
+    overflow-x: hidden;
+    background: #e2e8f0;
+}
+
+body.auth-index-modal.auth-campus-page::before,
+body.auth-index-modal.auth-campus-page::after { content: none; }
+
+.auth-index-modal__background {
+    position: fixed;
+    z-index: -2;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 78% 18%, rgba(215, 32, 47, .32), transparent 29%),
+        linear-gradient(135deg, #0f172a, #334155);
+}
+
+.auth-index-modal__background iframe {
+    display: block;
+    width: 100vw;
+    height: 100svh;
+    border: 0;
+    opacity: 0;
+    filter: blur(2px) saturate(.82) brightness(.82);
+    transform: scale(1.018);
+    transform-origin: center;
+    transition: opacity .32s ease-out;
+}
+
+.auth-index-modal__background.is-loaded iframe { opacity: 1; }
+
+body.auth-index-modal::after {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    content: '';
+    pointer-events: none;
+    background: rgba(15, 23, 42, .30);
+    backdrop-filter: blur(.5px);
+}
+
+@keyframes auth-modal-rise {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body.auth-index-modal > :not(script):not(.auth-index-modal__background) {
+    animation: auth-modal-rise .36s cubic-bezier(.22, .8, .32, 1) both;
+}
+
+body.auth-index-modal .auth-campus-card,
+body.auth-index-modal form.auth-campus-card,
+body.auth-index-modal main > form,
+body.auth-index-modal main > .bg-white,
+body.auth-index-modal > .bg-white {
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, .72);
+    box-shadow: 0 24px 58px rgba(15, 23, 42, .30);
+}
+
+@media (max-width: 640px) {
+    .auth-index-modal__background iframe { filter: blur(1.5px) saturate(.8) brightness(.78); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-index-modal__background iframe { transition: none; }
+    body.auth-index-modal > :not(script):not(.auth-index-modal__background) { animation: none; }
+}

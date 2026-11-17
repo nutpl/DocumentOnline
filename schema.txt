@@ -1,0 +1,62 @@
+DATABASE SCHEMA DETAILS
+=======================
+
+Table: users
+------------
+  user_id                   int(20)              NO    PRI NULL       auto_increment
+  username                  varchar(50)          NO    UNI NULL       
+  email                     varchar(100)         YES       NULL       
+  password                  varchar(255)         YES       NULL       
+  department_id             int(11)              YES   MUL NULL       
+  first_login               tinyint(1)           NO        0          
+  status                    enum('active','inactive') NO        active     
+  created_at                timestamp            NO        current_timestamp() 
+
+Table: user_roles
+-----------------
+  user_role_id              int(11)              NO    PRI NULL       auto_increment
+  user_id                   int(11)              NO    MUL NULL       
+  role                      enum('admin','teacher','staff','student') YES       NULL       
+
+Table: student
+--------------
+  student_id                int(11)              NO    PRI NULL       auto_increment
+  user_id                   int(11)              NO    UNI NULL       
+  student_number              varchar(20)          NO    UNI NULL       
+  firstname                 varchar(100)         YES       NULL       
+  lastname                  varchar(100)         YES       NULL       
+  email                     varchar(100)         YES       NULL       
+  group_id                  int(11)              NO    MUL NULL       
+  advisor_employee_id       int(11)              YES   MUL NULL       
+
+Table: employee
+---------------
+  employee_id               int(11)              NO    PRI NULL       auto_increment
+  user_id                   int(11)              YES   UNI NULL       
+  employee_code             varchar(30)          YES       NULL       
+  firstname                 varchar(100)         YES       NULL       
+  lastname                  varchar(100)         YES       NULL       
+  email                     varchar(255)         YES       NULL       
+  department_id             int(11)              YES   MUL NULL       
+  created_at                timestamp            NO        current_timestamp() 
+  employee_type             enum('teacher','staff') NO        NULL       
+
+Table: staff
+------------
+  Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'project.staff' doesn't exist
+
+Table: group_class
+------------------
+  group_id                  int(11)              NO    PRI NULL       auto_increment
+  department_id             int(11)              NO    MUL NULL       
+  group_name                varchar(50)          NO        NULL       
+  advisor_employee_id       int(11)              YES   MUL NULL       
+
+Table: positions
+----------------
+  position_id               int(11)              NO    PRI NULL       auto_increment
+  position_name             varchar(100)         NO        NULL       
+
+Table: teacher_position
+-----------------------
+  Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'project.teacher_position' doesn't exist

@@ -1,0 +1,10 @@
+{
+    "require": {
+        "setasign/fpdi": "^2.6",
+        "tecnickcom/tcpdf": "^6.11",
+        "phpoffice/phpword": "^1.1",
+        "setasign/fpdf": "^1.8",
+        "phpmailer/phpmailer": "^7.1",
+        "phpoffice/phpspreadsheet": "*"
+    }
+}

@@ -1,0 +1,67 @@
+erDiagram
+    users {
+        int user_id PK
+        varchar username
+        varchar email
+        varchar password
+        tinyint first_login
+        enum status
+        char active_session_token_hash
+        datetime active_session_at
+        timestamp created_at
+    }
+    document_type {
+        int document_type_id PK
+        varchar document_code
+        varchar document_name
+        varchar form_file
+        text description
+        enum status
+    }
+    document_template {
+        int template_id PK
+        int document_type_id FK
+        varchar template_name
+        varchar pdf_template
+        varchar docx_template
+        varchar original_file
+        varchar preview_image
+        int total_pages
+        varchar file_type
+        enum status
+        int imported_by FK
+        timestamp imported_at
+    }
+    template_fields {
+        int field_id PK
+        int template_id FK
+        varchar field_name
+        varchar field_label
+        enum field_type
+        int page_no
+        decimal pos_x
+        decimal pos_y
+        decimal width
+        decimal height
+        decimal font_size
+        tinyint required_field
+        text default_value
+    }
+    review_workflows {
+        int workflow_id PK
+        int document_type_id FK
+        varchar workflow_name
+        int version_no
+        enum workflow_status
+        enum revision_return_policy
+        int created_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    document_type ||--o{ document_template : "มีแม่แบบ"
+    users o|--o{ document_template : "นำเข้าแม่แบบ"
+    document_template ||--o{ template_fields : "กำหนดช่องกรอก"
+    document_type ||--o{ review_workflows : "กำหนด workflow"
+    users o|--o{ review_workflows : "สร้าง workflow"
+

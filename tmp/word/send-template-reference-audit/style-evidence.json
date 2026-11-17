@@ -1,0 +1,70 @@
+{
+  "input": "C:\\xampp\\htdocs\\Project\\templates\\official_internship\\send_letter_template.docx",
+  "fonts_by_char_count": {
+    "TH SarabunIT\u0e59": 1589,
+    "TH SarabunPSK": 40
+  },
+  "direct_run_formatting_runs": 122,
+  "direct_paragraph_formatting_paragraphs": 6,
+  "heading_like_paragraphs_not_heading_style": [],
+  "examples": {
+    "direct_run_formatting": [
+      {
+        "para_index": 1,
+        "run_text": "                          ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 1,
+        "run_text": "\u0e51\u0e55 \u0e21\u0e34\u0e16\u0e38\u0e19\u0e32\u0e22\u0e19 256\u0e59",
+        "style": "Normal"
+      },
+      {
+        "para_index": 1,
+        "run_text": "  ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "run_text": "\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "run_text": "   ",
+        "style": "Normal"
+      }
+    ],
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 14,
+        "text": "\t\u0e17\u0e31\u0e49\u0e07\u0e19\u0e35\u0e49 \u0e02\u0e2d\u0e43\u0e2b\u0e49\u0e2b\u0e19\u0e48\u0e27\u0e22\u0e07\u0e32\u0e19\u0e02\u0e2d\u0e07\u0e17\u0e48\u0e32\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e21\u0e34\u0e19\u0e1c\u0e25\u0e01\u0e32\u0e23\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e07\u0e32\u0e19\u0e19\u0e31\u0e01\u0e28\u0e36\u0e01\u0e29\u0e32 \u0e15\u0e32\u0e21 QR - Code \u0e14\u0e49\u0e32\u0e19\u0e25\u0e48\u0e32\u0e07\u0e2b\u0e25\u0e31\u0e07\u0e08\u0e32\u0e01\u0e17\u0e35\u0e48\u0e19\u0e31\u0e01\u0e28\u0e36\u0e01\u0e29\u0e32\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e07\u0e32\u0e19\u0e40\u0e2a\u0e23\u0e47\u0e08\u0e2a\u0e34\u0e49\u0e19\u0e15",
+        "style": "Normal"
+      },
+      {
+        "para_index": 17,
+        "text": "\t",
+        "style": "Normal"
+      },
+      {
+        "para_index": 18,
+        "text": "\t        \u0e02\u0e2d\u0e41\u0e2a\u0e14\u0e07\u0e04\u0e27\u0e32\u0e21\u0e19\u0e31\u0e1a\u0e16\u0e37\u0e2d",
+        "style": "Normal"
+      },
+      {
+        "para_index": 19,
+        "text": "",
+        "style": "Normal"
+      },
+      {
+        "para_index": 20,
+        "text": "",
+        "style": "Normal"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}

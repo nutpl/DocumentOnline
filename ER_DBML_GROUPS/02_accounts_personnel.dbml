@@ -1,0 +1,119 @@
+// ER Diagram กลุ่ม 02_accounts_personnel
+// วางทั้งหมดใน dbdiagram.io ได้โดยตรง
+
+Table department {
+  department_id int [pk]
+  faculty_id int
+  department_abbreviation varchar
+  department_name varchar
+}
+
+Table prefixes {
+  prefix_id int [pk]
+  prefix_name varchar
+  prefix_short varchar
+  status enum
+  created_at timestamp
+}
+
+Table positions {
+  position_id int [pk]
+  position_name varchar
+}
+
+Table users {
+  user_id int [pk]
+  username varchar
+  email varchar
+  password varchar
+  first_login tinyint
+  status enum
+  active_session_token_hash char
+  active_session_at datetime
+  created_at timestamp
+}
+
+Table user_roles {
+  user_role_id int [pk]
+  user_id int
+  role enum
+}
+
+Table password_reset_otp {
+  otp_id int [pk]
+  user_id int
+  otp_code varchar
+  expire_at datetime
+  used tinyint
+  created_at timestamp
+}
+
+Table activity_log {
+  log_id bigint [pk]
+  user_id int
+  activity varchar
+  detail text
+  activity_time timestamp
+}
+
+Table employee {
+  employee_id int [pk]
+  user_id int
+  employee_code varchar
+  prefix_id int
+  firstname varchar
+  lastname varchar
+  phone varchar
+  department_id int
+  employee_type enum
+  created_at timestamp
+}
+
+Table employee_position {
+  employee_position_id int [pk]
+  employee_id int
+  position_id int
+  is_primary tinyint
+}
+
+Table student {
+  student_id int [pk]
+  user_id int
+  student_number varchar
+  prefix_id int
+  firstname varchar
+  lastname varchar
+  group_id int
+}
+
+Table office_holders {
+  office_holder_id int [pk]
+  position_id int
+  employee_id int
+  holder_name varchar
+  department_id int
+  effective_from date
+  effective_to date
+  is_active tinyint
+  signature_title_line1 varchar
+  signature_title_line2 varchar
+  created_by int
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Foreign-key relationships within this group
+Ref: activity_log.user_id > users.user_id
+Ref: employee.department_id > department.department_id
+Ref: employee_position.employee_id > employee.employee_id
+Ref: employee_position.position_id > positions.position_id
+Ref: employee.prefix_id > prefixes.prefix_id
+Ref: employee.user_id > users.user_id
+Ref: office_holders.created_by > users.user_id
+Ref: office_holders.department_id > department.department_id
+Ref: office_holders.employee_id > employee.employee_id
+Ref: office_holders.position_id > positions.position_id
+Ref: password_reset_otp.user_id > users.user_id
+Ref: student.prefix_id > prefixes.prefix_id
+Ref: student.user_id > users.user_id
+Ref: user_roles.user_id > users.user_id

@@ -1,0 +1,220 @@
+// ER Diagram กลุ่ม 04_document_workflow
+// วางทั้งหมดใน dbdiagram.io ได้โดยตรง
+
+Table users {
+  user_id int [pk]
+  username varchar
+  email varchar
+  password varchar
+  first_login tinyint
+  status enum
+  active_session_token_hash char
+  active_session_at datetime
+  created_at timestamp
+}
+
+Table employee {
+  employee_id int [pk]
+  user_id int
+  employee_code varchar
+  prefix_id int
+  firstname varchar
+  lastname varchar
+  phone varchar
+  department_id int
+  employee_type enum
+  created_at timestamp
+}
+
+Table student {
+  student_id int [pk]
+  user_id int
+  student_number varchar
+  prefix_id int
+  firstname varchar
+  lastname varchar
+  group_id int
+}
+
+Table positions {
+  position_id int [pk]
+  position_name varchar
+}
+
+Table document_type {
+  document_type_id int [pk]
+  document_code varchar
+  document_name varchar
+  form_file varchar
+  description text
+  status enum
+}
+
+Table document_template {
+  template_id int [pk]
+  document_type_id int
+  template_name varchar
+  pdf_template varchar
+  docx_template varchar
+  original_file varchar
+  preview_image varchar
+  total_pages int
+  file_type varchar
+  status enum
+  imported_by int
+  imported_at timestamp
+}
+
+Table template_fields {
+  field_id int [pk]
+  template_id int
+  field_name varchar
+  field_label varchar
+  field_type enum
+  page_no int
+  pos_x decimal
+  pos_y decimal
+  width decimal
+  height decimal
+  font_size decimal
+  required_field tinyint
+  default_value text
+}
+
+Table documents {
+  document_id int [pk]
+  student_id int
+  template_id int
+  document_status enum
+  created_at timestamp
+  updated_at timestamp
+  submitted_at datetime
+}
+
+Table document_field_values {
+  value_id int [pk]
+  document_id int
+  field_id int
+  field_value text
+  updated_at timestamp
+}
+
+Table document_attachments {
+  attachment_id int [pk]
+  document_id int
+  uploaded_by int
+  original_name varchar
+  stored_name varchar
+  file_path varchar
+  mime_type varchar
+  file_size bigint
+  uploaded_at timestamp
+}
+
+Table review_workflows {
+  workflow_id int [pk]
+  document_type_id int
+  workflow_name varchar
+  version_no int
+  workflow_status enum
+  revision_return_policy enum
+  created_by int
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table review_workflow_steps {
+  workflow_step_id int [pk]
+  workflow_id int
+  step_order smallint
+  role_code varchar
+  step_name varchar
+  reviewer_source enum
+  reviewer_employee_id int
+  reviewer_position_id int
+  scope_type enum
+  is_required tinyint
+  created_at timestamp
+}
+
+Table document_review_processes {
+  process_id bigint [pk]
+  document_id int
+  workflow_id int
+  workflow_version_no int
+  current_step_order smallint
+  process_status enum
+  revision_count int
+  started_at timestamp
+  completed_at datetime
+  updated_at timestamp
+}
+
+Table document_review_step_instances {
+  document_step_id bigint [pk]
+  process_id bigint
+  source_workflow_step_id int
+  step_order smallint
+  role_code varchar
+  step_name varchar
+  reviewer_employee_id int
+  reviewer_user_id int
+  step_status enum
+  attempt_count int
+  activated_at datetime
+  reviewed_at datetime
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table document_events {
+  event_id bigint [pk]
+  document_id int
+  document_step_id bigint
+  actor_user_id int
+  event_type varchar
+  detail text
+  created_at timestamp
+}
+
+Table notifications {
+  notification_id bigint [pk]
+  recipient_user_id int
+  document_id int
+  notification_type varchar
+  title varchar
+  message text
+  target_url varchar
+  is_read tinyint
+  created_at timestamp
+  read_at datetime
+}
+
+// Foreign-key relationships within this group
+Ref: document_attachments.document_id > documents.document_id
+Ref: document_attachments.uploaded_by > users.user_id
+Ref: document_events.actor_user_id > users.user_id
+Ref: document_events.document_id > documents.document_id
+Ref: document_events.document_step_id > document_review_step_instances.document_step_id
+Ref: document_field_values.document_id > documents.document_id
+Ref: document_field_values.field_id > template_fields.field_id
+Ref: document_review_processes.document_id > documents.document_id
+Ref: document_review_processes.workflow_id > review_workflows.workflow_id
+Ref: document_review_step_instances.process_id > document_review_processes.process_id
+Ref: document_review_step_instances.reviewer_employee_id > employee.employee_id
+Ref: document_review_step_instances.reviewer_user_id > users.user_id
+Ref: document_review_step_instances.source_workflow_step_id > review_workflow_steps.workflow_step_id
+Ref: documents.student_id > student.student_id
+Ref: documents.template_id > document_template.template_id
+Ref: document_template.document_type_id > document_type.document_type_id
+Ref: document_template.imported_by > users.user_id
+Ref: employee.user_id > users.user_id
+Ref: notifications.document_id > documents.document_id
+Ref: notifications.recipient_user_id > users.user_id
+Ref: review_workflows.created_by > users.user_id
+Ref: review_workflows.document_type_id > document_type.document_type_id
+Ref: review_workflow_steps.reviewer_employee_id > employee.employee_id
+Ref: review_workflow_steps.reviewer_position_id > positions.position_id
+Ref: review_workflow_steps.workflow_id > review_workflows.workflow_id
+Ref: student.user_id > users.user_id
+Ref: template_fields.template_id > document_template.template_id

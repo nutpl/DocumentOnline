@@ -1,0 +1,30 @@
+#document{
+    position:relative;
+    width:900px;
+    margin:auto;
+}
+
+#paper{
+    width:100%;
+    display:block;
+}
+
+.input-field{
+    position:absolute;
+    background:transparent;
+    border:none;
+    border-bottom:1px solid transparent;
+    outline:none;
+    font-family:"TH Sarabun New",sans-serif;
+    font-size:22px;
+    color:#000;
+}
+
+textarea.input-field{
+    resize:none;
+    overflow:hidden;
+}
+
+.input-field:focus{
+    border-bottom:1px solid #2563eb;
+}

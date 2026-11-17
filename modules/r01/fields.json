@@ -1,0 +1,24 @@
+[
+    {
+        "name":"subject",
+        "type":"text",
+        "left":250,
+        "top":120,
+        "width":420
+    },
+    {
+        "name":"recipient",
+        "type":"text",
+        "left":250,
+        "top":160,
+        "width":420
+    },
+    {
+        "name":"detail",
+        "type":"textarea",
+        "left":100,
+        "top":230,
+        "width":560,
+        "height":160
+    }
+]

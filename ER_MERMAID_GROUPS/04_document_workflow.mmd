@@ -1,0 +1,197 @@
+erDiagram
+    users {
+        int user_id PK
+        varchar username
+        varchar email
+        varchar password
+        tinyint first_login
+        enum status
+        char active_session_token_hash
+        datetime active_session_at
+        timestamp created_at
+    }
+    employee {
+        int employee_id PK
+        int user_id FK
+        varchar employee_code
+        int prefix_id FK
+        varchar firstname
+        varchar lastname
+        varchar phone
+        int department_id FK
+        enum employee_type
+        timestamp created_at
+    }
+    student {
+        int student_id PK
+        int user_id FK
+        varchar student_number
+        int prefix_id FK
+        varchar firstname
+        varchar lastname
+        int group_id FK
+    }
+    positions {
+        int position_id PK
+        varchar position_name
+    }
+    document_type {
+        int document_type_id PK
+        varchar document_code
+        varchar document_name
+        varchar form_file
+        text description
+        enum status
+    }
+    document_template {
+        int template_id PK
+        int document_type_id FK
+        varchar template_name
+        varchar pdf_template
+        varchar docx_template
+        varchar original_file
+        varchar preview_image
+        int total_pages
+        varchar file_type
+        enum status
+        int imported_by FK
+        timestamp imported_at
+    }
+    template_fields {
+        int field_id PK
+        int template_id FK
+        varchar field_name
+        varchar field_label
+        enum field_type
+        int page_no
+        decimal pos_x
+        decimal pos_y
+        decimal width
+        decimal height
+        decimal font_size
+        tinyint required_field
+        text default_value
+    }
+    documents {
+        int document_id PK
+        int student_id FK
+        int template_id FK
+        enum document_status
+        timestamp created_at
+        timestamp updated_at
+        datetime submitted_at
+    }
+    document_field_values {
+        int value_id PK
+        int document_id FK
+        int field_id FK
+        text field_value
+        timestamp updated_at
+    }
+    document_attachments {
+        int attachment_id PK
+        int document_id FK
+        int uploaded_by FK
+        varchar original_name
+        varchar stored_name
+        varchar file_path
+        varchar mime_type
+        bigint file_size
+        timestamp uploaded_at
+    }
+    review_workflows {
+        int workflow_id PK
+        int document_type_id FK
+        varchar workflow_name
+        int version_no
+        enum workflow_status
+        enum revision_return_policy
+        int created_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+    review_workflow_steps {
+        int workflow_step_id PK
+        int workflow_id FK
+        smallint step_order
+        varchar role_code
+        varchar step_name
+        enum reviewer_source
+        int reviewer_employee_id FK
+        int reviewer_position_id FK
+        enum scope_type
+        tinyint is_required
+        timestamp created_at
+    }
+    document_review_processes {
+        bigint process_id PK
+        int document_id FK
+        int workflow_id FK
+        int workflow_version_no
+        smallint current_step_order
+        enum process_status
+        int revision_count
+        timestamp started_at
+        datetime completed_at
+        timestamp updated_at
+    }
+    document_review_step_instances {
+        bigint document_step_id PK
+        bigint process_id FK
+        int source_workflow_step_id FK
+        smallint step_order
+        varchar role_code
+        varchar step_name
+        int reviewer_employee_id FK
+        int reviewer_user_id FK
+        enum step_status
+        int attempt_count
+        datetime activated_at
+        datetime reviewed_at
+        timestamp created_at
+        timestamp updated_at
+    }
+    document_events {
+        bigint event_id PK
+        int document_id FK
+        bigint document_step_id FK
+        int actor_user_id FK
+        varchar event_type
+        text detail
+        timestamp created_at
+    }
+    notifications {
+        bigint notification_id PK
+        int recipient_user_id FK
+        int document_id FK
+        varchar notification_type
+        varchar title
+        text message
+        varchar target_url
+        tinyint is_read
+        timestamp created_at
+        datetime read_at
+    }
+
+    student ||--o{ documents : "สร้างเอกสาร"
+    document_template ||--o{ documents : "ใช้สร้าง"
+    documents ||--o{ document_field_values : "มีค่าช่องกรอก"
+    template_fields ||--o{ document_field_values : "รับค่า"
+    documents ||--o{ document_attachments : "มีไฟล์แนบ"
+    users o|--o{ document_attachments : "อัปโหลด"
+    document_type ||--o{ review_workflows : "กำหนด workflow"
+    review_workflows ||--o{ review_workflow_steps : "มีขั้นตอน"
+    employee o|--o{ review_workflow_steps : "ผู้พิจารณาเฉพาะคน"
+    positions o|--o{ review_workflow_steps : "ผู้พิจารณาตามตำแหน่ง"
+    documents ||--o| document_review_processes : "เริ่มกระบวนการ"
+    review_workflows ||--o{ document_review_processes : "ถูกนำไปใช้"
+    document_review_processes ||--o{ document_review_step_instances : "สร้างขั้นตอนจริง"
+    review_workflow_steps o|--o{ document_review_step_instances : "ต้นแบบขั้นตอน"
+    employee o|--o{ document_review_step_instances : "ผู้พิจารณา"
+    users o|--o{ document_review_step_instances : "บัญชีผู้พิจารณา"
+    documents ||--o{ document_events : "บันทึกเหตุการณ์"
+    document_review_step_instances o|--o{ document_events : "เหตุการณ์ของขั้นตอน"
+    users o|--o{ document_events : "ผู้กระทำ"
+    documents o|--o{ notifications : "เกี่ยวกับเอกสาร"
+    users ||--o{ notifications : "ผู้รับแจ้งเตือน"
+

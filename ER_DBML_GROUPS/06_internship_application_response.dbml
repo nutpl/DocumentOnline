@@ -1,0 +1,149 @@
+// ER Diagram กลุ่ม 06_internship_application_response
+// วางทั้งหมดใน dbdiagram.io ได้โดยตรง
+
+Table users {
+  user_id int [pk]
+  username varchar
+  email varchar
+  password varchar
+  first_login tinyint
+  status enum
+  active_session_token_hash char
+  active_session_at datetime
+  created_at timestamp
+}
+
+Table student {
+  student_id int [pk]
+  user_id int
+  student_number varchar
+  prefix_id int
+  firstname varchar
+  lastname varchar
+  group_id int
+}
+
+Table documents {
+  document_id int [pk]
+  student_id int
+  template_id int
+  document_status enum
+  created_at timestamp
+  updated_at timestamp
+  submitted_at datetime
+}
+
+Table internship_calendar {
+  calendar_id int [pk]
+  academic_year smallint
+  semester tinyint
+  start_date date
+  end_date date
+  status enum
+  created_by int
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table internship_profile {
+  internship_profile_id int [pk]
+  student_id int
+  request_status enum
+  request_reason enum
+  previous_profile_id int
+  closed_reason varchar
+  closed_at datetime
+  calendar_id int
+  student_phone varchar
+  year_level tinyint
+  recipient_name varchar
+  company_name varchar
+  company_address text
+  subdistrict varchar
+  district varchar
+  province varchar
+  postal_code varchar
+  company_phone varchar
+  company_fax varchar
+  contact_prefix varchar
+  contact_name varchar
+  contact_position varchar
+  contact_phone varchar
+  job_position varchar
+  job_description text
+  capacity_note varchar
+  recipient_position varchar
+  recipient_department varchar
+  company_number varchar
+  company_moo varchar
+  company_building varchar
+  company_floor varchar
+  company_road varchar
+  company_alley varchar
+  company_email varchar
+  contact_department varchar
+  contact_email varchar
+  qualification_department tinyint
+  qualification_preparation tinyint
+  qualification_gpa tinyint
+  qualification_company tinyint
+  updated_at timestamp
+  created_at timestamp
+}
+
+Table internship_application {
+  internship_application_id int [pk]
+  internship_profile_id int
+  document_id int
+  request_date date
+  contact_status enum
+  delivery_method enum
+  status enum
+  signed_file varchar
+  submitted_at datetime
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table internship_response_document {
+  response_document_id int [pk]
+  internship_profile_id int
+  original_filename varchar
+  stored_filename varchar
+  review_status enum
+  review_note text
+  reviewed_by int
+  uploaded_at datetime
+  reviewed_at datetime
+  updated_at timestamp
+}
+
+Table internship_response_declaration {
+  response_declaration_id bigint [pk]
+  internship_profile_id int
+  reported_result enum
+  evidence_state enum
+  student_note text
+  declared_by int
+  declared_at datetime
+  updated_at timestamp
+}
+
+Table internship_response_no_document_review {
+}
+
+// Foreign-key relationships within this group
+Ref: documents.student_id > student.student_id
+Ref: internship_application.document_id > documents.document_id
+Ref: internship_application.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_calendar.created_by > users.user_id
+Ref: internship_profile.calendar_id > internship_calendar.calendar_id
+Ref: internship_profile.previous_profile_id > internship_profile.internship_profile_id
+Ref: internship_profile.student_id > student.student_id
+Ref: internship_response_declaration.declared_by > users.user_id
+Ref: internship_response_declaration.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_response_document.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_response_document.reviewed_by > users.user_id
+Ref: internship_response_no_document_review.internship_profile_id > internship_profile.internship_profile_id
+Ref: internship_response_no_document_review.reviewed_by > users.user_id
+Ref: student.user_id > users.user_id

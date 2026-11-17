@@ -1,0 +1,38 @@
+/* Shared visual treatment for the public authentication pages. */
+.auth-campus-page {
+    position: relative;
+    isolation: isolate;
+    min-height: 100svh;
+    overflow-x: hidden;
+    background: #374151;
+}
+
+.auth-campus-page::before {
+    position: fixed;
+    z-index: -2;
+    inset: -24px;
+    content: '';
+    background: url('/Project/assets/images/auth-campus-background.jpg') center / cover no-repeat;
+    filter: grayscale(72%) blur(2.5px);
+    transform: scale(1.02);
+}
+
+.auth-campus-page::after {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    content: '';
+    background: linear-gradient(135deg, rgba(17, 24, 39, .48), rgba(75, 85, 99, .30));
+}
+
+.auth-campus-card {
+    border: 1px solid rgba(255, 255, 255, .62);
+    background: rgba(255, 255, 255, .93);
+    box-shadow: 0 24px 55px rgba(15, 23, 42, .34);
+    backdrop-filter: blur(10px);
+}
+
+@media (max-width: 640px) {
+    .auth-campus-page::before { filter: grayscale(72%) blur(2px); }
+    .auth-campus-card { background: rgba(255, 255, 255, .96); }
+}

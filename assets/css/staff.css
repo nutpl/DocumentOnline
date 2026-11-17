@@ -1,0 +1,128 @@
+.staff-sidebar-collapse {
+    position: absolute;
+    right: -1rem;
+    top: 1.55rem;
+    z-index: 2;
+    color: #b91c1c;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 5px 14px rgba(15, 23, 42, .18);
+}
+
+.staff-sidebar-collapse:hover { color: #fff; background: #dc2626; }
+
+/* Give every staff navigation item one identical icon column. The COOP mark
+   is wider than the Font Awesome glyphs, so it uses this same column instead
+   of pushing the menu label out of alignment. */
+#staff-sidebar nav > a > i,
+#staff-sidebar nav > a > .staff-menu-icon {
+    flex: 0 0 2.5rem;
+    width: 2.5rem !important;
+    text-align: center;
+}
+
+/* Keep the remaining navigation symbols in the same clean, red COOP accent.
+   Active items inherit white so they remain readable on the selected state. */
+#staff-sidebar nav > a:not(.bg-red-600) > i {
+    color: #dc2626;
+    font-size: 1.05rem;
+}
+
+/* The COOP asset is red and therefore disappears on the selected red menu.
+   Turn only that active mark white; its transparent background is retained. */
+#staff-sidebar nav > a.bg-red-600 .staff-menu-icon img {
+    filter: brightness(0) invert(1);
+    opacity: .96;
+}
+
+@media (min-width: 1024px) {
+    /* Keep the navigation visible while the main content scrolls independently. */
+    body { height: 100dvh; overflow: hidden; }
+
+    #staff-sidebar ~ .min-h-screen {
+        display: flex;
+        height: 100dvh;
+        min-height: 0;
+        flex-direction: column;
+    }
+
+    #staff-sidebar ~ .min-h-screen > header { position: relative; z-index: 10; flex: 0 0 auto; }
+    #staff-sidebar ~ .min-h-screen > main { min-height: 0; flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain; }
+
+    #staff-sidebar,
+    #staff-sidebar ~ div { transition: width .22s ease, margin-left .22s ease; }
+    #staff-sidebar.staff-sidebar-collapsed { width: 5.5rem !important; }
+    #staff-sidebar.staff-sidebar-collapsed ~ div { margin-left: 5.5rem !important; }
+    #staff-sidebar.staff-sidebar-collapsed .staff-sidebar-brand { justify-content: center; padding-inline: .75rem !important; }
+    #staff-sidebar.staff-sidebar-collapsed .staff-sidebar-label,
+    #staff-sidebar.staff-sidebar-collapsed .staff-faculty-logo,
+    #staff-sidebar.staff-sidebar-collapsed nav > p,
+    #staff-sidebar.staff-sidebar-collapsed nav a > span:not(.staff-menu-icon),
+    #staff-sidebar.staff-sidebar-collapsed .staff-menu-count,
+    #staff-sidebar.staff-sidebar-collapsed .staff-sidebar-footer a > span { display: none !important; }
+    #staff-sidebar.staff-sidebar-collapsed nav { padding-inline: .75rem !important; }
+    #staff-sidebar.staff-sidebar-collapsed nav a { justify-content: center; padding-inline: 0 !important; min-height: 3rem; }
+    #staff-sidebar.staff-sidebar-collapsed nav a i { width: auto !important; flex-basis: auto; font-size: 1.08rem; }
+    #staff-sidebar.staff-sidebar-collapsed .staff-menu-icon { width: 2.5rem !important; }
+    #staff-sidebar.staff-sidebar-collapsed .staff-sidebar-footer { padding-inline: .75rem !important; }
+    #staff-sidebar.staff-sidebar-collapsed .staff-sidebar-footer a { min-height: 3rem; padding: 0 !important; }
+
+    /* Group-class data benefits from using the full workspace width. */
+    body:has(#group-create-panel) main {
+        width: 100% !important;
+        max-width: none !important;
+        margin-inline: 0 !important;
+    }
+
+    body:has(#group-create-panel) table { min-width: 960px !important; }
+
+    /* Advisor assignment is a data-management view: use the full workspace. */
+    body:has(select[name^="advisor_employee_id"]) main {
+        width: 100% !important;
+        max-width: none !important;
+        margin-inline: 0 !important;
+    }
+}
+
+/* Group-advisor assignment page. */
+body:has(select[name^="advisor_employee_id"]) main > form {
+    margin-top: 1.25rem !important;
+    border-color: #e2e8f0 !important;
+}
+
+body:has(select[name^="advisor_employee_id"]) main > form > div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: #f8fafc;
+}
+
+body:has(select[name^="advisor_employee_id"]) main > form > div:first-of-type h2::before {
+    content: "จัดการจากหน้าเดียว";
+    display: block;
+    margin-bottom: .25rem;
+    color: #dc2626;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+}
+
+body:has(select[name^="advisor_employee_id"]) main > form table { min-width: 860px !important; }
+body:has(select[name^="advisor_employee_id"]) main > form thead { background: #f8fafc !important; }
+body:has(select[name^="advisor_employee_id"]) main > form tbody tr { transition: background-color .16s ease; }
+body:has(select[name^="advisor_employee_id"]) main > form tbody tr:hover { background: #fff7f7; }
+body:has(select[name^="advisor_employee_id"]) main > form tbody td:first-child { color: #0f172a; font-weight: 800; }
+body:has(select[name^="advisor_employee_id"]) main > form select {
+    border-color: #cbd5e1 !important;
+    outline: none;
+    transition: border-color .16s ease, box-shadow .16s ease;
+}
+body:has(select[name^="advisor_employee_id"]) main > form select:focus {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, .1);
+}
+body:has(select[name^="advisor_employee_id"]) main > form > div:last-child {
+    background: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
