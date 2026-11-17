@@ -1,1 +1,2 @@
+*.pth filter=lfs diff=lfs merge=lfs -text
 generated/easyocr_models/*.pth filter=lfs diff=lfs merge=lfs -text
